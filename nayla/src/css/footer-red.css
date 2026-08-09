@@ -1,0 +1,2 @@
+.footer { background: #2d2d2d; color: white; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; border-top: 3px solid #b22234; }
+.footer-links a { color: #b22234; margin-left: 20px; text-decoration: none; }

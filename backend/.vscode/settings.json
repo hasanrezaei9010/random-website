@@ -1,0 +1,6 @@
+{
+    "workbench.externalBrowser": "firefox",
+    "workbench.editor.autoLockGroups": {
+        "mainThreadWebview-simpleBrowser.view": false
+    }
+}

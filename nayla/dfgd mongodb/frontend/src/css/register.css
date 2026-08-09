@@ -1,0 +1,55 @@
+.register {
+  font-size: large;
+  display: flex;
+  min-height: fit-content;
+  max-height: 100%;
+  flex-direction: column;
+  background-color: lightgreen;
+  align-items: center;
+  font-family: vazir;
+  .span-group{
+    margin: 8px;
+  }
+}
+.register .input-group {
+  position: relative;
+  width: 200px;
+  height: 30px;
+  margin: 15px;
+  border-color: blue;
+  border-radius: 10px;
+}
+.register .input-group label {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  border-color: blue;
+  border-radius: 10px;
+}
+.register input {
+  width: 100%;
+  height: 100%;
+
+  outline: none;
+  border-color: blue;
+  border-radius: 10px;
+}
+.register input:focus ~ label ,input:not(:placeholder-shown) ~ label {
+  font-size: 0.95rem;
+  translate: -5px -26px;
+  transition-duration: 0.3s ;
+}
+.register .button-group {
+  width: 200px;
+  height: 30px;
+  margin: 15px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+.register .button-group button {
+  width: 50%;
+  height: 100%;
+  background-color: rgb(16, 241, 46);
+  font-size: large;
+  border-radius: 10px;
+}

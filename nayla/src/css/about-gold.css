@@ -1,0 +1,7 @@
+.about-page { background: #faf8f5; color: #1a1a1a; padding: 40px 60px; }
+.about-header h1 { color: #1a1a1a; }
+.about-header p { color: #666; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
+.about-text ul { list-style: none; padding: 0; }
+.about-text ul li { color: #1a1a1a; margin: 8px 0; }
+.about-img-placeholder { background: #e0dcd5; height: 300px; border-radius: 20px; border: 2px dashed #d4af37; }
