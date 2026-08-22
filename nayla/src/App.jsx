@@ -12,6 +12,8 @@ import Contact from "./components/Contact.jsx";
 import Knowledge from "./components/Knowledge.jsx";
 import Service from "./components/Service.jsx";
 import { useEffect, useRef} from "react";
+import {ToastContainer ,toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   const snowRef = useRef(null);
@@ -22,15 +24,16 @@ export default function App() {
 
   return (
     <>
+    <ToastContainer/>
       <Context.Provider value={{}}>
         <Routes>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute />}></Route>
             <Route path="/service" element={<Service />} />
             <Route path="/knowledge" element={<Knowledge />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Home />} />
-          </Route>
+          
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>

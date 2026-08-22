@@ -1,34 +1,36 @@
-.papa{
-    width: 100%;
-    display: flex;
-    overflow: hidden;
-    background-color: rgb(74, 252, 4);
+.papa {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  background-color: navy;
+
+   mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 5%,
+    black 95%,
+    transparent
+  );
 }
-.list {
-    mask-image:linear-gradient(
-            to right,
-            transparent,
-            black 5%,
-            black 95%,
-            transparent
-         )
-     
-}
+
 .papa:hover > .list {
-    animation-play-state: paused;
+  animation-play-state: paused;
 }
 .item {
-    display: flex;
-    width: max-content;
-    border: 1px solid rgb(220, 110, 50);
-    padding: 0.5rem 0.75rem;
-    flex-shrink: 0;
+  display: flex;
+  width: max-content;
+  border: 1px solid gold;
+  border: 5px;
+  padding: 0.5rem 0.75rem;
+  flex-shrink: 0;
+  color: whitesmoke;
+  font-size: large;
 }
 @keyframes movingStrip {
-    from{
-        translate: 0%;
-    }
-    to{
-        translate:100%;
-    }
+  from {
+    translate: 0%;
+  }
+  to {
+    translate: 100%;
+  }
 }

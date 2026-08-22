@@ -46,13 +46,13 @@
   font-size: larger;
 }
 
-.slideicon a {
+.slideicon i {
 pointer-events: auto !important;
 cursor:  pointer !important;
 z-index: 99 !important;
   color: #ea2027;
 }
-.slideicon a:hover {
+.slideicon i:hover {
   display: block;
   cursor: pointer;
 }

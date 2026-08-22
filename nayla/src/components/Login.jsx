@@ -1,8 +1,8 @@
 import React, { Component, createRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import axios from "axios";
 import Context from "../context.js";
 import "../css/login.css";
+import { toast } from "react-toastify";
 //import snowfall from "./snowfall.js"
 
 //import 'bootstrap/dist/css/bootstrap.min.css'
@@ -18,15 +18,14 @@ class Login extends Component {
   secondEmail = createRef();
 
   state = {
-    token: null,
     sending: false,
-    errors: []
+    errors: [],
   };
 
   codeRequest = async () => {
     try {
       const response = await axios.post(
-        "http://10.58.154.175:5000/api/task/recovery",
+        "http://localhost:5000/api/task/recovery",
         {
           email: this.recoveryemail.current.value,
         },
@@ -36,32 +35,33 @@ class Login extends Component {
         console.log(response);
         alert("کد به ایمیل شما ارسال شد");
       } else {
-        console.log(response,"ftufuuf");
+        console.log(response, "ftufuuf");
         this.setState({ errors: [response.message] });
       }
     } catch (error) {
-      console.log(error,"dgdh");
+      console.log(error, "dgdh");
       this.setState({ errors: [error.message] });
     }
   };
 
   codeVerification = async () => {
     try {
-      const response = await axios.post(
-        "http://10.58.154.175:5000/api/task/verify",
-        {
+      const response = await fetch("http://localhost:5000/api/task/verify", {
+        method:"POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           resetCode: this.code.current.value,
           newPassword: this.newPassword.current.value,
-          email : this.secondEmail.current.value
-        },
-        { headers: { "custom-header": "value" } },
-      );
+          email: this.secondEmail.current.value,
+        }),
+      });
       if (response.ok) {
         console.log(response);
-        alert("رمز با موفقیت تغییر کرد");
+        toast.success("رمز با موفقیت تغییر کرد");
       } else {
         console.log(response);
         this.setState({ errors: [response.message] });
+        toast.error("response.message");
       }
     } catch (error) {
       this.setState({ errors: [error.message] });
@@ -70,39 +70,31 @@ class Login extends Component {
 
   Login = async (e) => {
     this.setState({ sending: true });
-    /* try {
-      const captchaResponse = await fetch("http://10.58.154.175:5000/api/task/captcha", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token:this.state.token }),
-      });
-      if (captchaResponse.ok) { */
     try {
-      const loginResponse = await axios.post(
-        "http://10.58.154.175:5000/api/auth/login",
+      const loginResponse = await fetch(
+        "http://localhost:5000/api/auth/login",
         {
-          identifier: this.identifier.current.value,
-          password: this.password.current.value,
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            identifier: this.identifier.current.value,
+            password: this.password.current.value,
+          }),
         },
-        { headers: { "custom-header": "value" } },
       );
+
       if (loginResponse.status == 200) {
         console.log(loginResponse);
         localStorage.setItem("authtoken", loginResponse.data);
         window.location.href = "/";
       } else {
-        alert("login failed :" + loginResponse.message);
+        toast.error("login failed :" + loginResponse.message);
         this.setState({ errors: ["login failed :" + loginResponse.message] });
         console.log(loginResponse);
       }
-
-      /* } else {
-        alert("recaptcha failed :" + captchaResponse.message);
-        this.setState({errors:["recaptcha failed :" + captchaResponse.message]})
-        console.log(captchaResponse);
-      } */
     } catch (error) {
-      console.error(error,"feswfrwr");
+      console.error(error, "feswfrwr");
+      toast.error("ارتباط با سرور شکست خورد");
       this.setState({ errors: [error.message, "ارتباط با سرور شکست خورد"] });
     } finally {
       this.setState({ sending: false });
@@ -155,19 +147,14 @@ class Login extends Component {
             </button>
           </div>
 
-          <ReCAPTCHA
-            sitekey="dhhghgh"
-            onChange={(t) => this.setState({ token: t })}
-          />
-
           <div className="span-group">
             <span>
-              حساب ندارید؟ <a href="/register">ساخت حساب </a>
+               حساب ندارید؟ <a href="/register">ساخت حساب  </a>
             </span>
-            <div>
-              رمز را فراموش کردم
+            <div> 
+               رمز را فراموش کردم
               <button popoverTarget="recovery-group" popoverTargetAction="show">
-                بازگردانی
+               بازگردانی
               </button>
             </div>
           </div>
@@ -181,7 +168,10 @@ class Login extends Component {
               *
             </button>
             <div>
-              <h5>لطفا نشانی ایمیل خود را بنویسید و روی دکمه کلیک کنید تا کد ارسال شود</h5>
+              <h5>
+                لطفا نشانی ایمیل خود را بنویسید و روی دکمه کلیک کنید تا کد ارسال
+                شود
+              </h5>
               <input
                 ref={this.recoveryemail}
                 type="email"
@@ -216,9 +206,7 @@ class Login extends Component {
                 inputMode="numeric"
                 placeholder="کد پیامک شده"
               />
-              <button onClick={this.codeVerification} >
-                تایید
-              </button>
+              <button onClick={this.codeVerification}>تایید</button>
             </div>
           </dialog>
         </div>

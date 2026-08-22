@@ -15,7 +15,7 @@ const ProtectedRoute = () => {
       }
       try {
         const response = await fetch(
-          "http://10.58.154.175:5000/api/task/authorization",
+          "http://localhost:5000/api/task/authorization",
           {
             method: "POST",
             headers: {

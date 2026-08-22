@@ -3,6 +3,7 @@ import Context from "../context.js";
 import Navbar from "./Navbar.jsx";
 import Footer from "./Footer.jsx";
 import Movingstrip from "./Movingstrip.jsx";
+import Heading from "./Heading.jsx";
 // import "../css/home-gold.css";
  import "../css/home-red.css";
 
@@ -13,6 +14,7 @@ export default class Home extends Component {
       <>
       <Movingstrip />
         <Navbar />
+        <Heading />
         <main className="home-main">
           <section className="hero">
             <div className="hero-image"><div className="hero-img-placeholder"></div></div>

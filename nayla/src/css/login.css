@@ -2,16 +2,33 @@ ul {
   background-color: brown;
 }
 .login {
+  width: 80%;
+  height: 80%;
+  margin: auto;
   font-size: large;
   display: flex;
   min-height: fit-content;
   max-height: 100%;
   flex-direction: column;
-  background-color: lightgreen;
+  background-color: navy;
   align-items: center;
   font-family: vazir;
+  color: whitesmoke;
+  border-radius: 20px;
   .span-group {
-    margin: 8px;
+    display: flex;
+    margin: 15px;
+    color: whitesmoke;
+    a {
+      color: whitesmoke
+      
+    }
+    button{
+      background-color: navy;
+      border: none;
+      color: whitesmoke;
+      font-size: large;
+    }
   }
 }
 .login .input-group {
@@ -21,44 +38,52 @@ ul {
   margin: 15px;
   border-color: blue;
   border-radius: 10px;
-}
-.login .input-group label {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  border-color: blue;
-  border-radius: 10px;
-}
-.login input {
+ input {
   width: 100%;
   height: 100%;
-
   outline: none;
   border-color: blue;
   border-radius: 10px;
 }
+label {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color:black;
+  border-color: blue;
+  border-radius: 10px;
+}
+}
+
 .login input:focus ~ label,input:not(:placeholder-shown) ~ label {
   font-size: 0.95rem;
   translate: -5px -26px;
   transition-duration: 0.3s;
+  color: gold;
 }
+
 .login .button-group {
   width: 200px;
   height: 30px;
   margin: 15px;
   text-align: center;
   font-size: 0.95rem;
-}
-.login .button-group button {
-  width: 50%;
+
+  button {
+  width: 100%;
   height: 100%;
-  background-color: rgb(16, 241, 46);
+  background-color: whitesmoke;
   font-size: large;
-  border-radius: 10px;
+  color: navy;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+} 
 }
-.span-group {
-  display: flex;
+button:hover {
+cursor: pointer;
 }
+
 [popover] {
   min-width: 200px;
   min-height: 250px;

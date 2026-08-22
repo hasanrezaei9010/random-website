@@ -1,33 +1,29 @@
 import React, { Component } from "react";
 import { createRef } from "react";
+import { toast } from "react-toastify";
 import "../css/heading.css";
-import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css";
 
 export default class Heading extends Component {
   state = {
-    activeIndex: null,
+    activeIndex: 1,
   };
 
-
-  slider = (e) => {
-    alert("i exixst")
-   
-    const index = e.target.index;
-    console.log(index);
+  slider = (index) => {
+    toast.info("i exist");
     this.setState({ activeIndex: index });
   };
 
   handleNextSlide = () => {
+    let nextIndex;
     this.setState((prevState) => {
-      const nextIndex =
-        this.state.activeIndex == 3 ? 1 : (prevState.activeIndex = 1);
+      nextIndex  =
+        this.state.activeIndex == 3 ? 1 : (prevState.activeIndex += 1);
       return { activeIndex: nextIndex };
     });
   };
 
   componentDidMount() {
-    import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
-   this.interval = setInterval(this.handleNextSlide, 5000);
+    this.interval = setInterval(this.handleNextSlide, 5000);
   }
 
   componentWillUnmount() {
@@ -58,9 +54,15 @@ export default class Heading extends Component {
           </div>
         </div>
         <div className="slideicon">
-           <a onClick={this.slider} index={1} href=""><i className="fa fa-circle"></i></a>
-           <a onClick={this.slider} index={2} href=""><i className="fa fa-circle"></i></a>
-           <a onClick={this.slider} index={3} href=""><i className="fa fa-circle"></i></a>
+          
+            <i onClick={this.slider(1)} className="fa fa-circle"></i>
+          
+         
+            <i onClick={this.slider(2)} className="fa fa-circle"></i>
+          
+          
+            <i onClick={this.slider(3)} className="fa fa-circle"></i>
+          
         </div>
       </div>
     );
