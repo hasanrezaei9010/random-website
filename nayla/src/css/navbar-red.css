@@ -1,5 +1,33 @@
-.navbar { background: #ffffff; padding: 15px 60px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #b22234; }
-.brand { color: #2d2d2d; font-size: 1.8rem; font-weight: bold; text-decoration: none; }
-.nav-links a { color: #2d2d2d; margin-left: 25px; text-decoration: none; font-weight: 500; }
-.nav-btn { background: #b22234; color: white !important; padding: 8px 18px; border-radius: 30px; }
-.nav-btn:hover { background: #8b1a1a; }
+.navbar {
+  width: 90%;
+  background: #ffffff;
+  padding: 15px 60px;
+  margin: 0px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #b22234;
+}
+.brand {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+.nav-links a {
+  color: #2d2d2d;
+  margin-left: 25px;
+  text-decoration: none;
+  font-weight: 500;
+}
+.nav-btn {
+  background: white;
+  color: #b22234 ;
+  font-size: 1rem;
+  border: 2px solid #b22234;
+  padding: 8px 18px;
+  border-radius: 30px;
+}
+.nav-btn:hover {
+  background: #8b1a1a;
+  color: white ;
+}

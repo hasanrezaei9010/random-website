@@ -38,30 +38,30 @@ export default class Heading extends Component {
             className={`slide ${this.state.activeIndex == 1 ? "active" : ""}`}
           >
             <img src="/motor1.jpg" alt="" className="" />
-            <span>عون العرب</span>
+            <span>قدرت و زیبایی</span>
           </div>
           <div
             className={`slide ${this.state.activeIndex == 2 ? "active" : ""}`}
           >
             <img src="/motor2.jpg" alt="" className="" />
-            <span>dhdtdyy</span>
+            <span style={{color:"black"}}>سواری راحت</span>
           </div>
           <div
             className={`slide ${this.state.activeIndex == 3 ? "active" : ""}`}
           >
             <img src="/motor3.jpg" alt="" className="" />
-            <span>hjgkkkkh</span>
+            <span style={{color:"black"}}>تجربه بهتر</span>
           </div>
         </div>
         <div className="slideicon">
           
-            <i onClick={this.slider(1)} className="fa fa-circle"></i>
+            <i onClick={()=>this.slider(1)} className="fa fa-circle"></i>
           
          
-            <i onClick={this.slider(2)} className="fa fa-circle"></i>
+            <i onClick={()=>this.slider(2)} className="fa fa-circle"></i>
           
           
-            <i onClick={this.slider(3)} className="fa fa-circle"></i>
+            <i onClick={()=>this.slider(3)} className="fa fa-circle"></i>
           
         </div>
       </div>

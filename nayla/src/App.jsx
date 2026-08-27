@@ -1,26 +1,24 @@
-import React from "react";
 import Register from "./components/Register.jsx";
 import Login from "./components/Login.jsx";
 import { Route, Routes } from "react-router-dom";
-import MovingStrip from "./components/Movingstrip.jsx";
 import Home from "./components/Home.jsx";
 import Context from "./context.js";
-import axios from "axios";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Knowledge from "./components/Knowledge.jsx";
 import Service from "./components/Service.jsx";
 import { useEffect, useRef} from "react";
-import {ToastContainer ,toast} from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function App() {
   const snowRef = useRef(null);
 
-  useEffect(() => {
+  /* useEffect(() => {
     import("https://cdn.jsdelivr.net/npm/@zachleat/snow-fall@1.0.3/snow-fall.js");
-  }, []);
+  }, []); */
 
   return (
     <>

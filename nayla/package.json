@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^7.3.1",
     "axios": "^1.19.0",
     "bootstrap": "^5.3.8",
     "cors": "^2.8.6",
+    "jquery": "^4.0.0",
+    "owl.carousel": "^2.3.4",
     "react": "^19.2.8",
     "react-device-detect": "^2.2.3",
     "react-dom": "^19.2.8",

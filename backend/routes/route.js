@@ -8,10 +8,12 @@ const user = require("./user/user.js");
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const task = require("./random tasks/task.js");
+const product = require("./product/product.js");
 
 router.use("/auth", auth);
 router.use("/user", authenticated, user);
 router.use('/task',task);
+router.use('/product',product);
 router.use(error);
 
 module.exports = router;
