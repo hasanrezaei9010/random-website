@@ -1,6 +1,5 @@
 import React, { Component } from "react";
- import "../css/service-gold.css";
-// import "../css/service-red.css";
+import "../css/service-red.css";
 
 export default class Services extends Component {
   render() {

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
- import "../css/contact-gold.css";
-// import "../css/contact-red.css";
+import "../css/contact-red.css";
 
 export default class Contact extends Component {
   render() {

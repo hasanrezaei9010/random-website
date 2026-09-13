@@ -5,15 +5,13 @@ const auth = require("./auth/auth.js");
 const authenticated = require("./../middlewares/authenticated.js");
 const error = require("./../middlewares/error.js");
 const user = require("./user/user.js");
-const config = require("config");
-const jwt = require("jsonwebtoken");
 const task = require("./random tasks/task.js");
 const product = require("./product/product.js");
 
 router.use("/auth", auth);
-router.use("/user", authenticated, user);
 router.use('/task',task);
 router.use('/product',product);
+router.use('/user',user);
 router.use(error);
 
 module.exports = router;

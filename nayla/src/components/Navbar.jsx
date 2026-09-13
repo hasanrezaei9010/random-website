@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import "../css/navbar-gold.css";
  import "../css/navbar-red.css";
 
 export default class Navbar extends Component {

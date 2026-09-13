@@ -118,7 +118,7 @@ export default class Home extends Component {
             >
               {this.state.products
                 ? this.state.products.map((product) => (
-                    <SwiperSlide className='product-grid' key={product._id}>
+                    <SwiperSlide key={product._id}>
                       <div className="product-card">
                         <img className="card-img-placeholder" src={product.picture} alt={product.name} />
                         <h3>{product.name}</h3>

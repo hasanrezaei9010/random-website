@@ -13,6 +13,10 @@
   font-weight: bold;
   text-decoration: none;
 }
+.nav-links  {
+  display: flex;
+  flex-direction: ;
+}
 .nav-links a {
   color: #2d2d2d;
   margin-left: 25px;

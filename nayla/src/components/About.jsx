@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import "../css/about-gold.css";
- import "../css/about-red.css";
+import "../css/about-red.css";
 
 export default class About extends Component {
   render() {

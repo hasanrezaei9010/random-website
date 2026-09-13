@@ -8,6 +8,7 @@ import About from "./components/About.jsx";
 import Contact from "./components/Contact.jsx";
 import Knowledge from "./components/Knowledge.jsx";
 import Service from "./components/Service.jsx";
+import Admin from "./components/Admin.jsx";
 import { useEffect, useRef} from "react";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,7 +32,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
             <Route path="/" element={<Home />} />
-          
+            <Route path="/admin" element={<Admin />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
         </Routes>

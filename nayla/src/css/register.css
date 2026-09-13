@@ -20,6 +20,9 @@
       
     }
   }
+  h1 {
+    animation: glowText 5s infinite;
+  }
 }
 .register .input-group {
   position: relative;
@@ -75,3 +78,26 @@ input:not(:placeholder-shown) ~ label {
     outline: none;
   }
 }
+@keyframes glowText {
+  0% {
+    text-shadow: 0px 0 5px #9c0909;
+  }
+  100% {
+    text-shadow: 0px 20px 30px 1px #ddec04;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.2em;
+  }
+  .input-group {
+    min-width: 50%;
+    max-width: 75%;
+  }
+  .button-group {
+    min-width: 50%;
+    max-width: 50%;
+  }
+}
+

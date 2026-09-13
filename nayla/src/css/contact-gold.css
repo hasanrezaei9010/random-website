@@ -1,8 +1,0 @@
-.contact-page { background: #faf8f5; padding: 40px 60px; }
-.contact-page h1 { color: #1a1a1a; }
-.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 30px; }
-.contact-item { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
-.contact-item span { font-size: 2rem; }
-.contact-item h4 { margin: 0; color: #1a1a1a; }
-.contact-item p { margin: 0; color: #666; }
-.map-placeholder { background: #e0dcd5; height: 300px; border-radius: 20px; border: 2px dashed #d4af37; }

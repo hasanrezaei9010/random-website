@@ -30,6 +30,9 @@ ul {
       font-size: large;
     }
   }
+  h1 {
+    animation: glowText 5s infinite;
+  }
 }
 .login .input-group {
   position: relative;
@@ -139,7 +142,7 @@ cursor: pointer;
 
 @keyframes glowText {
   0% {
-    text-shadow: 0px 0 5px #9c0909;
+    text-shadow: 0px 10px 5px 0px #9c0909;
   }
   100% {
     text-shadow: 0px 20px 30px 1px #ddec04;
