@@ -37,19 +37,19 @@ export default class Heading extends Component {
           <div
             className={`slide ${this.state.activeIndex == 1 ? "active" : ""}`}
           >
-            <img src="/motor1.jpg" alt="" className="" />
+            <img src="/motor1.jpg" alt="" className="" loading="lazy"/>
             <span>قدرت و زیبایی</span>
           </div>
           <div
             className={`slide ${this.state.activeIndex == 2 ? "active" : ""}`}
           >
-            <img src="/motor2.jpg" alt="" className="" />
+            <img src="/motor2.jpg" alt="" className=""  loading="lazy"/>
             <span style={{color:"black"}}>سواری راحت</span>
           </div>
           <div
             className={`slide ${this.state.activeIndex == 3 ? "active" : ""}`}
           >
-            <img src="/motor3.jpg" alt="" className="" />
+            <img src="/motor3.jpg" alt="" className=""  loading="lazy"/>
             <span style={{color:"black"}}>تجربه بهتر</span>
           </div>
         </div>

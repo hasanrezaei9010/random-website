@@ -2,6 +2,7 @@
   "dependencies": {
     "auto-bind": "^4.0.0",
     "bcrypt": "^6.0.0",
+    "compression": "^1.8.2",
     "config": "^4.4.1",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -10,10 +11,12 @@
     "express": "^5.2.1",
     "express-async-error": "^0.0.2",
     "express-list-endpoints": "^7.1.1",
+    "express-rate-limit": "^8.7.0",
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.3",
     "mongoose-timestamp": "^0.6.0",
+    "node-cache": "^5.1.2",
     "nodemailer": "^9.0.3",
     "nodemon": "^3.1.14",
     "winston": "^3.19.0"

@@ -12,17 +12,32 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const User = require("./models/user.js");
 const Product = require("./models/product.js");
-
+const rateLimit = require('express-rate-limit');
+const compression = require('compression');
 const expressListEndpoints = require("express-list-endpoints");
+const errorHandler = require('./middlewares/error.js')
+const limiter = rateLimit({
+    windowMs : 15 * 60 * 1000,
+    max : 100,
+    message : 'تعداد درخواست های شما بیش از حد مجاز است لطفا بعدا تلاش بکنید.'
+});
+const loginLimiter = rateLimit({
+    windowMs : 15 * 60 * 1000,
+    max : 5,
+    message : 'تعداد تلاش برای ورود بیش از حد مجاز است لطفا بعد از 15 دقیقه تلاش کنید.'
+});
 
 app.use('../nayla/public', express.static('../nayla/public'));
-app.use(cors());
+app.use(cors({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(cookieParser());
-
+app.use('/api',limiter);
+app.use('/api/auth/login',loginLimiter);
+app.use(compression());
 app.use('/api', routes);
+app.use(errorHandler);
 
 const endpoints = expressListEndpoints(app);
 
@@ -54,49 +69,5 @@ process.on("unhandledRejection",(ex)=>{
     process.exit(1);
 }) */
 
-const kawazaki = new Product({
-    name: 'هوندا CB400',
-    picture: '../../public/motor1.jpg',
-    description: '۴۰۰ سی‌سی • ۲۰۲۵',
-    price: '۲۵۰M'
-})
-kawazaki.save()
-const kawazaki2 = new Product({
-    name: 'یاماها MT-07',
-    picture: '../../public/motor2.jpg',
-    description: '۷۰۰ سی‌سی • ۲۰۲۴',
-    price: '۳۸۰M'
-})
-kawazaki2.save()
-const kawazaki3 = new Product({
-    name: 'دوکاتی پانیگاله',
-    picture: '../../public/motor3.jpg',
-    description: '۹۵۰ سی‌سی • ۲۰۲۵',
-    price: '۶۵۰M'
-})
-kawazaki3.save()
-const kawazaki4 = new Product({
-    name: 'دوکاتی پانیگاله',
-    picture: '../../public/motor1.jpg',
-    description: '۹۵۰ سی‌سی • ۲۰۲۵',
-    price: '۶۵۰M'
-})
-kawazaki4.save()
-const kawazaki5 = new Product({
-    name: 'دوکاتی پانیگاله',
-    picture: '../../public/motor2.jpg',
-    description: '۹۵۰ سی‌سی • ۲۰۲۵',
-    price: '۶۵۰M'
-})
-kawazaki5.save()
-
-/* const hasan =   new User({
-name : 'hasan',
-email : 'hasan@gmail.com',
-password: 'hasan'
-  })
-hasan.save() */
-
-console.log(endpoints)
 app.listen(port, () => { console.log(`running on port ${port}`) });
 

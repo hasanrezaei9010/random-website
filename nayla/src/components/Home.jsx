@@ -10,16 +10,10 @@ import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-/* import $ from "jquery";
-window.$ = window.jQuery = $; */
-/* import "owl.carousel";
-import "owl.carousel/dist/assets/owl.carousel.css";
-import "owl.carousel/dist/assets/owl.theme.default.css"; */
-
-// import "../css/home-gold.css";
 import "../css/home-red.css";
+import { useNavigate } from "react-router-dom";
 
-export default class Home extends Component {
+class Home extends Component {
   static contextType = Context;
 
   state = {
@@ -51,24 +45,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     this.fetchProduct();
-    /* window.jQuery(".owl-carousel").owlCarousel({
-      loop: true,
-      margin: 10,
-      nav: true,
-      responsive: {
-        0: { item: 1 },
-        600: { item: 3 },
-        1000: { item: 4 },
-      },
-    }); */
   }
-
-  componentDidUpdate() {}
-
-  /*  componentWillUnmount() {
-    window.jQuery(".owl-carousel").trigger("destroy.owl.carousel");
-    window.jQuery(".owl-carousel").removeClass("owl-loaded");
-  } */
 
   render() {
     return (
@@ -119,8 +96,21 @@ export default class Home extends Component {
               {this.state.products
                 ? this.state.products.map((product) => (
                     <SwiperSlide key={product._id}>
-                      <div className="product-card">
-                        <img className="card-img-placeholder" src={product.picture} alt={product.name} />
+                      <div
+                        className="product-card"
+                        onClick={() =>{
+                          console.log('clicked',product._id);
+                          this.props.navigate(`/product/${product._id}`, {
+                            state: { product }
+                          })}
+                        }
+                      >
+                        <img
+                          className="card-img-placeholder"
+                          src={product.picture}
+                          alt={product.name}
+                          loading="lazy"
+                        />
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
                         <span className="price">{product.price}</span>
@@ -136,4 +126,9 @@ export default class Home extends Component {
       </>
     );
   }
+}
+
+export default function HomeWrapper() {
+const navigate = useNavigate();
+return <Home navigate={navigate}/>
 }

@@ -1,0 +1,35 @@
+import React, { Component } from 'react';
+import {toasr} from 'react-toastify';
+
+export default class UploadProduct extends Component {
+  state = { name: '', price: '', picture: null };
+
+  handleFile = (e) => {
+    this.setState({ picture: e.target.files[0] });
+  };
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', this.state.name);
+    formData.append('price', this.state.price);
+    formData.append('picture', this.state.picture);
+
+    await fetch('http://localhost:5000/api/admin/add', {
+      method: 'POST',
+      body: formData
+    });
+    alert('محصول اضافه شد');
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input placeholder="نام" onChange={e => this.setState({ name: e.target.value })} />
+        <input placeholder="قیمت" onChange={e => this.setState({ price: e.target.value })} />
+        <input type="file" onChange={this.handleFile} />
+        <button type="submit">ذخیره</button>
+      </form>
+    );
+  }
+}

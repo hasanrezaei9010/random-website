@@ -3,11 +3,10 @@ const timestamp = require('mongoose-timestamp');
 
 const schema = new mongoose.Schema({
 name : {type:String, required:true,unique:true},
-favorites : {type:[String]},
-books: {type:[mongoose.Schema.Types.ObjectId],ref:'Book'},
+orders: [{type:[mongoose.Schema.Types.ObjectId],ref:'Order'}],
 email : {type:String,required :true,unique:true},
 password: {type:String,required:true},
-date: {type:Date, default: Date.now()},
+date: {type:Date, default: Date.now},
 admin : {type:Boolean},
 picture : {type:String,required:function(){
     return this.admin === true;

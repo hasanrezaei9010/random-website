@@ -1,38 +1,77 @@
 const controller = require("../controller");
-const User = require("./../models/user");
+const Product = require("../../models/product.js");
 const _ = require('lodash');
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const NodeCache = require('node-cache');
+const cache = new NodeCache({ stdTTL: 600 });
 
-module.exports = new (class extends controller{
-async register(req,res){
-    let user = await User.findOne({email:req.body.email});
-    if(user){
-        return this.response({res,message:'user already exists',code:201,data:user})
+module.exports = new (class extends controller {
+  // گرفتن همه محصولات
+  async getAllProducts(req, res) {
+    try {
+
+    } catch (error) {
+
     }
- user = new this.User(_.pick(req.body,['name','email','password']));
- const salt = await bcrypt.genSalt(10);
- user.password =  await bcrypt.hash(user.password,salt); //وقتی کاربر هنوز تو دیتابیس نیست و تو رمه برا چی باس اویت بذاریم
+    const cached = cache.get('products');
+    if (cached) return res.json({ data: cached });
 
- await user.save();
- this.response({res,
-    message:'user registered successfully',
-    data:_.pick(user,["_id","name","email"])});
-}
+    const products = await Product.find();
+    cache.set('products', products);
+    res.json({ data: products });
+  }
 
-async login(req,res){
-    const user = await User.findOne({email:req.body.email});
-    if(!user){
-        this.response({res,code:400,message:"invalid email or password"})
+  // اضافه کردن محصول
+  async addProduct(req, res) {
+    try {
+      const { name, price, description, picture } = req.body;
+      const product = new Product({ name, price, description, picture });
+      await product.save();
+      res.status(201).json({ data: product });
+    } catch (error) {
+      console.error(error)
+      const err = new Error('مشکل داخلی سرور');
+      err.status = 500;
+      throw err
     }
-    const isvalid = await bcrypt.compare(user.password,req.body.password); //مگه رمز کاربر الان هش نشده پس باید رمز داخل ریکوئست ر هم هش کنیم تا بشه مقایسه کرد دیگه بله؟
-if (!isvalid){
-    return this.response({res,code:400,message:"invalid email or password"})
-}
-const token = jwt.sign({_id:user.id},config.get("jwt"));
-this.response({res,message:"logged in",data:token})
 
-}
+  }
+
+  // حذف محصول
+  async deleteProduct(req, res) {
+    try {
+      await Product.findByIdAndDelete(req.params.id);
+      res.json({ message: 'محصول حذف شد' });
+    } catch (error) {
+      console.error(error)
+      const err = new Error('مشکل داخلی سرور');
+      err.status = 500;
+      throw err
+    }
+
+  }
+
+  // ویرایش محصول
+  async updateProduct(req, res) {
+    try {
+      const {name , picture ,description ,price} = req.body.product;
+      const product = await Product.findById(req.params.id);
+      if(name) product.name = name;
+      if(picture) product.picture = picture;
+      if(description) product.description = description;
+      if(price) product.price = price;
+      product.save()
+      res.json({message:'محصول با موفقیت به روز شد', data: product });
+    } catch (error) {
+      console.error(error)
+      const err = new Error('مشکل داخلی سرور');
+      err.status = 500;
+      throw err
+    }
+
+  }
+
 
 })();
