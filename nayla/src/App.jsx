@@ -1,15 +1,17 @@
-import React , {lazy, Suspense} from 'react'
+import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
-const Home = lazy(() => import ("./components/Home.jsx"));
-const Login = lazy(() => import ("./components/Register.jsx"));
-const Register = lazy(() => import ("./components/Register.jsx"));
-const Admin = lazy(() => import ("./components/Admin.jsx"));
-const Cart = lazy(() => import ("./components/Cart.jsx"));
-const Checkout = lazy(() => import ("./components/Checkout.jsx"));
-const ProductDetail = lazy(() => import ("./components/ProductDetail.jsx"));
-/* const Home = lazy(() => import ("./components/Home.jsx"));
-const Home = lazy(() => import ("./components/Home.jsx"));
+const Home = lazy(() => import("./components/Home.jsx"));
+const Login = lazy(() => import("./components/Register.jsx"));
+const Register = lazy(() => import("./components/Register.jsx"));
+const Admin = lazy(() => import("./components/Admin.jsx"));
+const Cart = lazy(() => import("./components/Cart.jsx"));
+const Checkout = lazy(() => import("./components/Checkout.jsx"));
+const ProductDetail = lazy(() => import("./components/ProductDetail.jsx"));
+const AdminProtectedRoute = lazy(
+  () => import("./components/AdminProtectedRoute.jsx"),
+);
+/*const Home = lazy(() => import ("./components/Home.jsx"));
 const Home = lazy(() => import ("./components/Home.jsx"));
 const Home = lazy(() => import ("./components/Home.jsx")); */
 import Context from "./context.js";
@@ -23,7 +25,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-
 export default function App() {
   const snowRef = useRef(null);
 
@@ -35,22 +36,31 @@ export default function App() {
     <>
       <ToastContainer />
       <Suspense fallback={<div>...در حال بارگذاری</div>}>
-      <Context.Provider value={{}}>
-        <Routes>
-          <Route element={<ProtectedRoute />}></Route>
-          <Route path="/service" element={<Service />} />
-          <Route path="/knowledge" element={<Knowledge />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/product/:id" element={<ProductDetail />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </Context.Provider>
+        <Context.Provider value={{}}>
+          <Routes>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+            </Route>
+            <Route path="/service" element={<Service />} />
+            <Route path="/knowledge" element={<Knowledge />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/admin"
+              element={
+                <AdminProtectedRoute>
+                  <Admin />
+                </AdminProtectedRoute>
+              }
+            />
+          </Routes>
+        </Context.Provider>
       </Suspense>
       <snow-fall
         mode="page"

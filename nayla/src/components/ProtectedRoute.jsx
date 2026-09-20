@@ -2,13 +2,14 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const ProtectedRoute = () => {
-  const token = localStorage.getItem("authtoken");
+  const token = localStorage.getItem("token");
+  const user = localStorage.getItem("user");
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   
   useEffect(() => {
     const authorize = async () => {
-      if (!token) {
+      if (!token || !user) {
         setIsLoading(false);
         setIsAuthenticated(false);
         return;
@@ -26,7 +27,7 @@ const ProtectedRoute = () => {
         if (response.ok) {
           setIsAuthenticated(true);
         } else {
-          localStorage.removeItem("authtoken");
+          localStorage.removeItem("token");
           setIsAuthenticated(false);
         }
       } catch (error) {
@@ -39,6 +40,8 @@ const ProtectedRoute = () => {
 
     authorize();
   }, []);
+
+
 if (isLoading) {
    return <div style={{backgroundColor:"lightgreen",textAlign:"center",height:"100%",width:"window.innerWidth"}}>
     authorizing token</div>;

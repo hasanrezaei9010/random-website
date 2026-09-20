@@ -47,7 +47,7 @@ class Login extends Component {
   codeVerification = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/task/verify", {
-        method:"POST",
+        method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           resetCode: this.code.current.value,
@@ -82,15 +82,21 @@ class Login extends Component {
           }),
         },
       );
-
-      if (loginResponse.status == 200) {
-        console.log(loginResponse);
-        localStorage.setItem("authtoken", loginResponse.data);
-        window.location.href = "/";
+      const data = loginResponse.json();
+      if (data.status == 200) {
+        if (data.data.user.admin) {
+          localStorage.setItem("token", data.data.token);
+          localStorage.setItem("user", JSON.stringify(data.data.user));
+          window.location.href = "/admin";
+        } else {
+          localStorage.setItem("token", data.data.token);
+          localStorage.setItem("user", JSON.stringify(data.data.user));
+          window.location.href = "/";
+        }
       } else {
-        toast.error("login failed :" + loginResponse.message);
-        this.setState({ errors: ["login failed :" + loginResponse.message] });
-        console.log(loginResponse);
+        toast.error("login failed :" + data.message);
+        this.setState({ errors: ["login failed :" + data.message] });
+        console.log(data);
       }
     } catch (error) {
       console.error(error, "feswfrwr");
@@ -149,12 +155,12 @@ class Login extends Component {
 
           <div className="span-group">
             <span>
-               حساب ندارید؟ <a href="/register">ساخت حساب  </a>
+              حساب ندارید؟ <a href="/register">ساخت حساب </a>
             </span>
-            <div> 
-               رمز را فراموش کردم
+            <div>
+              رمز را فراموش کردم
               <button popoverTarget="recovery-group" popoverTargetAction="show">
-               بازگردانی
+                بازگردانی
               </button>
             </div>
           </div>

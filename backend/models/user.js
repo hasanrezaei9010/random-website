@@ -15,7 +15,7 @@ resetCode:String,
 codeExpiry:String,
 resetToken:String
 });
-//schema.plugin(timestamp);
+schema.plugin(timestamp);
 
 
 const User = mongoose.model("user",schema);

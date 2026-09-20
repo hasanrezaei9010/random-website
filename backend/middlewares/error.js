@@ -1,7 +1,7 @@
-/* const winston = require("winston"); */
+const winston = require("winston"); */
 
 async function errors(error,req,res,next){
-  /*   winston.error(error.message,error); */
+  winston.error(error.message,error);
   console.error(error.stack);
   res.status(error.status || 500).json({
     success : false,

@@ -64,8 +64,15 @@ module.exports = new (class extends controller {
           message: "invalid email or cash",
         });
       }
-      const token = jwt.sign({ id: user.id }, config.get("jwt"));
-      this.response({ res, code: 200, message: "logged in", data: token });
+      const token = jwt.sign({ _id: user.id, admin: user.admin }, config.get("jwt"));
+      this.response({
+        res, code: 200,
+        message: "logged in",
+        data: {
+          token,
+          user: { _id: user._id, name: user.name, email: user.email, admin: user.admin }
+        }
+      });
     } catch (error) {
       console.log(error)
     }

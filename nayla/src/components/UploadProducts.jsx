@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {toasr} from 'react-toastify';
+import {toast} from 'react-toastify';
 
 export default class UploadProduct extends Component {
   state = { name: '', price: '', picture: null };
@@ -19,7 +19,7 @@ export default class UploadProduct extends Component {
       method: 'POST',
       body: formData
     });
-    alert('محصول اضافه شد');
+    toast.success('محصول اضافه شد');
   };
 
   render() {

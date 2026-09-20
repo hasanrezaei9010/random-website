@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const routes = require("./routes/route.js");
 const debug = require("debug")("clash");
 const config = require("config");
-/* const winston = require("winston"); */
+const winston = require("winston"); */
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const User = require("./models/user.js");
@@ -15,7 +15,8 @@ const Product = require("./models/product.js");
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const expressListEndpoints = require("express-list-endpoints");
-const errorHandler = require('./middlewares/error.js')
+const errorHandler = require('./middlewares/error.js');
+const helmet = require('helmet');
 const limiter = rateLimit({
     windowMs : 15 * 60 * 1000,
     max : 100,
@@ -27,8 +28,9 @@ const loginLimiter = rateLimit({
     message : 'تعداد تلاش برای ورود بیش از حد مجاز است لطفا بعد از 15 دقیقه تلاش کنید.'
 });
 
+app.use(helmet());
 app.use('../nayla/public', express.static('../nayla/public'));
-app.use(cors({}));
+app.use(cors({origin:['http://localhost:3001']}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -47,7 +49,7 @@ mongoose.connect('mongodb://localhost:27017/Nayla')
     .catch(() => console.log('couldnt connect'));
 
 
-/* const logger = winston.createLogger({
+const logger = winston.createLogger({
     level:"info",
     format: winston.format.json(),
    transports:[
@@ -67,7 +69,7 @@ process.on("unhandledRejection",(ex)=>{
     debug("an unhandledRejection has occured");
     logger.info(ex.message);
     process.exit(1);
-}) */
+})
 
 app.listen(port, () => { console.log(`running on port ${port}`) });
 
