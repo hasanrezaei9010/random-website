@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {toast} from 'react-toastify';
+import '../css/checkout.css';
 
 export default class Checkout extends Component {
   state = {

@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const routes = require("./routes/route.js");
 const debug = require("debug")("clash");
 const config = require("config");
-const winston = require("winston"); */
+const winston = require("winston");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const User = require("./models/user.js");
@@ -49,7 +49,7 @@ mongoose.connect('mongodb://localhost:27017/Nayla')
     .catch(() => console.log('couldnt connect'));
 
 
-const logger = winston.createLogger({
+/* const logger = winston.createLogger({
     level:"info",
     format: winston.format.json(),
    transports:[
@@ -58,7 +58,7 @@ const logger = winston.createLogger({
 });
 winston.add(logger,transports[0]);
 logger.add(new winston.transports.Console({format:winston.format.simple()}))
-logger.info("tetsing")
+logger.info("tetsing") */
 
 process.on("uncaughtException",(ex)=>{
     debug("an uncaughtException has occured");

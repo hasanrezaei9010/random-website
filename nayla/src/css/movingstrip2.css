@@ -1,0 +1,89 @@
+.papa {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  display: flex;
+  gap: 40px;
+  position: relative;
+}
+
+.papa::before,
+.papa::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.papa::before {
+  right: 0;
+  background: linear-gradient(to left, var(--bg-secondary), transparent);
+}
+
+.papa::after {
+  left: 0;
+  background: linear-gradient(to right, var(--bg-secondary), transparent);
+}
+
+.papa .list {
+  display: flex;
+  gap: 40px;
+  white-space: nowrap;
+  animation: movingStrip 30s infinite linear;
+  flex-shrink: 0;
+}
+
+.papa .item {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  position: relative;
+  padding-left: 40px;
+  letter-spacing: -0.3px;
+  transition: var(--transition);
+}
+
+.papa .item::before {
+  content: '🏍️';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+@keyframes movingStrip {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .papa {
+    padding: 10px 0;
+    gap: 20px;
+  }
+
+  .papa .list {
+    gap: 24px;
+    animation-duration: 20s;
+  }
+
+  .papa .item {
+    font-size: 0.85rem;
+    padding-left: 24px;
+  }
+
+  .papa .item::before {
+    font-size: 0.9rem;
+  }
+}

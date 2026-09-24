@@ -1,9 +1,10 @@
 import React, { Component, createRef } from "react";
 import axios from "axios";
 import Context from "../context.js";
-import "../css/login.css";
 import { toast } from "react-toastify";
-//import snowfall from "./snowfall.js"
+//import "../css/login.css";
+import "../css/login2.css";
+
 
 //import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -33,13 +34,13 @@ class Login extends Component {
       );
       if (response.ok) {
         console.log(response);
-        alert("کد به ایمیل شما ارسال شد");
+        toast.success("کد به ایمیل شما ارسال شد");
       } else {
-        console.log(response, "ftufuuf");
+        console.log(response);
         this.setState({ errors: [response.message] });
       }
     } catch (error) {
-      console.log(error, "dgdh");
+      console.log(error.message);
       this.setState({ errors: [error.message] });
     }
   };
@@ -82,8 +83,8 @@ class Login extends Component {
           }),
         },
       );
-      const data = loginResponse.json();
-      if (data.status == 200) {
+      const data = await loginResponse.json();
+      if (loginResponse.status == 200) {
         if (data.data.user.admin) {
           localStorage.setItem("token", data.data.token);
           localStorage.setItem("user", JSON.stringify(data.data.user));
@@ -111,61 +112,67 @@ class Login extends Component {
     return (
       <>
         {this.state.errors.length > 0 ? (
-          <ul>
+          <ul className="errors-box">
             {this.state.errors.map((error, index) => (
               <li key={index}>{error}</li>
             ))}
           </ul>
         ) : null}
 
-        <div className="login container mt-5" id="login">
-          <h1 className="text-center mb-4">خوش آمدید</h1>
+        <div className="login login-page" id="login">
+          
+          <div className="login-card">
+            <h1>خوش آمدید</h1>
+            <div className="input-group form-group">
+              <input
+                ref={this.identifier}
+                id="username"
+                type="text"
+                placeholder=""
+              />
+              <label htmlFor="username">ایمیل یا نام کاربری</label>
+            </div>
 
-          <div className="input-group form-floating flex-grow-1">
-            <input
-              ref={this.identifier}
-              id="username"
-              type="text"
-              placeholder=""
-              className="form-control"
-            />
-            <label htmlFor="username">ایمیل یا نام کاربری</label>
-          </div>
+            <div className="input-group form-group">
+              <input
+                ref={this.password}
+                id="password"
+                type="password"
+                placeholder=""
+              />
+              <label htmlFor="password">رمز</label>
+            </div>
 
-          <div className="input-group d-grid gap-2 mb-3">
-            <input
-              ref={this.password}
-              id="password"
-              type="password"
-              placeholder=""
-              className="form-control"
-            />
-            <label htmlFor="password">رمز</label>
-          </div>
-
-          <div className="button-group mb-3">
-            <button
-              disabled={this.state.sending}
-              className="m-2 btn btn-sm btn-success"
-              onClick={this.Login}
-            >
-              ورود
-            </button>
-          </div>
-
-          <div className="span-group">
-            <span>
-              حساب ندارید؟ <a href="/register">ساخت حساب </a>
-            </span>
-            <div>
-              رمز را فراموش کردم
-              <button popoverTarget="recovery-group" popoverTargetAction="show">
-                بازگردانی
+            <div className="button-group mb-3">
+              <button
+                disabled={this.state.sending}
+                className="btn-login"
+                onClick={this.Login}
+              >
+                ورود
               </button>
             </div>
+          
+
+          <div className="forgot-row">
+              <button popoverTarget="recovery-group" popoverTargetAction="show">
+               رمز را فراموش کردم
+              </button>
           </div>
 
-          <dialog id="recovery-group" popover="manual">
+          <button 
+          disabled={this.state.sending}
+          className="btn-login"
+          onClick={this.Login}
+          >
+           ورود
+          </button>
+
+          <p className="link">
+            حساب ندارید ؟<a href="/register">ساخت حساب</a>
+          </p>
+
+          <dialog id="recovery-group" className="modal-popover" popover="manual">
             <button
               id="close-button"
               popoverTargetAction="hide"
@@ -215,6 +222,7 @@ class Login extends Component {
               <button onClick={this.codeVerification}>تایید</button>
             </div>
           </dialog>
+          </div>
         </div>
       </>
     );

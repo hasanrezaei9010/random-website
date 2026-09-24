@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 module.exports = new (class extends controller {
-  async register(req, res, next) {
+  async register(req, res) {
     try {
       let user = await this.User.findOne({ email: req.body.email });
       if (user) {
@@ -39,7 +39,7 @@ module.exports = new (class extends controller {
     }
   }
 
-  async login(req, res, next) {
+  async login(req, res) {
     try {
       const isEmail = req.body.identifier.includes("@");
       let identifier = [];
@@ -48,20 +48,21 @@ module.exports = new (class extends controller {
       } else {
         identifier.push({ name: req.body.identifier });
       }
-      const user = await this.User.findOne().or(identifier);
+      const user = await this.User.findOne(identifier[0]);
       if (!user) {
         this.response({
           res,
           code: 400,
-          message: "invalid username or password",
+          message: "couldnt find user",
         });
       }
-      const isvalid = await bcrypt.compare(req.body.password, user.password); //مگه رمز کاربر الان هش نشده پس باید رمز داخل ریکوئست ر هم هش کنیم تا بشه مقایسه کرد دیگه بله؟
+      console.log(user,req.body.password,await bcrypt.compare(req.body.password ,user.password))
+      const isvalid = await bcrypt.compare(req.body.password ,user.password); //مگه رمز کاربر الان هش نشده پس باید رمز داخل ریکوئست ر هم هش کنیم تا بشه مقایسه کرد دیگه بله؟
       if (!isvalid) {
         return this.response({
           res,
           code: 400,
-          message: "invalid email or cash",
+          message: "invalid email or password",
         });
       }
       const token = jwt.sign({ _id: user.id, admin: user.admin }, config.get("jwt"));

@@ -8,6 +8,9 @@ router.get("/recieve",
 router.get("/edit",
     controller.editProfile
 );
+router.get("/all",
+    controller.fetchAllUsers
+);
 
 
 module.exports = router;

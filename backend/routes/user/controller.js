@@ -35,5 +35,26 @@ module.exports = new (class extends controller {
     res.json({ data: user });
   }
 
+  async fetchAllUsers(req,res) {
+    try {
+      const users = await this.User.find();
+      if (users) {
+        this.response({
+          res,
+          code: 200,
+          message: "users sent successfully",
+          data: users
+        })
+      } else {
+        this.response({
+          res,
+          code: 500,
+          message: "couldnt find the requested users",
+        })
+      }
+    } catch (er) {
+      console.log(er)
+    }
+  }
 
 })();

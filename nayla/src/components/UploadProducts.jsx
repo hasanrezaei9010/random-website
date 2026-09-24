@@ -24,12 +24,15 @@ export default class UploadProduct extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <>
+      <h2>بارگذاری محصول</h2>
+      <form onSubmit={this.handleSubmit} className='UPLOAD-PRODUCT-FORM'>
         <input placeholder="نام" onChange={e => this.setState({ name: e.target.value })} />
         <input placeholder="قیمت" onChange={e => this.setState({ price: e.target.value })} />
         <input type="file" onChange={this.handleFile} />
         <button type="submit">ذخیره</button>
       </form>
+      </>
     );
   }
 }

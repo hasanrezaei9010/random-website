@@ -1,0 +1,134 @@
+.checkout-link {
+  display: block;
+  width: 100%;
+  padding: 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: var(--transition);
+}
+
+.checkout-link:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.35);
+}
+
+@media (max-width: 640px) {
+  .cart-item {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .cart-item img {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .cart-item h4 {
+    flex: 1 1 100%;
+  }
+  
+  .total {
+    padding: 18px 20px;
+    font-size: 1.1rem;
+  }
+}
+
+
+
+
+
+.checkout-form {
+  max-width: 600px;
+  margin: 60px auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.checkout-form h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.checkout-form input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.checkout-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
+}
+
+.checkout-form .total {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.checkout-form button {
+  padding: 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 8px;
+}
+
+.checkout-form button:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.35);
+}
+
+.checkout-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (max-width: 640px) {
+  .checkout-form {
+    padding: 24px 20px;
+    margin: 30px 16px;
+  }
+  
+  .checkout-form h2 {
+    font-size: 1.2rem;
+  }
+}

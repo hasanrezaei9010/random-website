@@ -8,8 +8,8 @@ router.post(
 
   validator.registerValidator(),
   controller.validate,
-  (req, res, next) => controller.register(req, res, next),
-);
+  controller.register
+)
 
 router.post(
   "/login",

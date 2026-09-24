@@ -1,8 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import './css/app.css';
 
 const Home = lazy(() => import("./components/Home.jsx"));
-const Login = lazy(() => import("./components/Register.jsx"));
+const Login = lazy(() => import("./components/Login.jsx"));
 const Register = lazy(() => import("./components/Register.jsx"));
 const Admin = lazy(() => import("./components/Admin.jsx"));
 const Cart = lazy(() => import("./components/Cart.jsx"));

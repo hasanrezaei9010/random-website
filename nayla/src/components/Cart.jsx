@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
+import '../css/cart.css';
 
 export default class Cart extends Component {
   state = {
@@ -22,10 +23,10 @@ export default class Cart extends Component {
 
   render() {
     return (
-      <div className="cart">
+      <div className="cart-page">
         <h2>سبد خرید</h2>
         {this.state.cart.length === 0 ? (
-          <p>سبد خرید خالی است</p>
+          <p className="cart-empty-text">سبد خرید خالی است</p>
         ) : (
           <>
             {this.state.cart.map(item => (
@@ -39,6 +40,7 @@ export default class Cart extends Component {
             ))}
             <div className="total">جمع کل: {this.getTotal()} تومان</div>
             <Link 
+            className="checkout-link"
             style={{all:'unset',backgroundColor:'white',font:'#b22234',border:'2px solid #b22234',padding:'5px',marginTop:'50px',borderRadius:'8px'}}
             to={'/checkout'}>ادامه و پرداخت</Link>
           </>

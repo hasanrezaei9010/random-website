@@ -1,0 +1,256 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a0a;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-page::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 48px 40px;
+  animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-card h1 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 32px;
+  letter-spacing: -0.5px;
+}
+
+.login-card .form-group {
+  margin-bottom: 20px;
+}
+
+.login-card .form-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #a0a0a0;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.login-card .form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.login-card .form-group input:focus {
+  outline: none;
+  border-color: #e63946;
+  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
+}
+
+.login-card .btn-login {
+  width: 100%;
+  padding: 14px;
+  background: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.login-card .btn-login:hover {
+  background: #ff4d5e;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.35);
+}
+
+.login-card .btn-login:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-card .link {
+  text-align: center;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  margin-top: 24px;
+  font-size: 1.2rem;
+}
+
+.login-card .link a {
+  color: #e63946;
+  font-weight: 600;
+  margin-right: 4px;
+  text-decoration: none;
+}
+
+.login-card .link a:hover {
+  text-decoration: underline;
+}
+
+.login-card .forgot-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  
+}
+
+.login-card .forgot-row button {
+  background: transparent;
+  border: none;
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+  font-size: 1.1rem;
+}
+
+.login-card .forgot-row button:hover {
+  color: #e63946;
+}
+
+.errors-box {
+  background: rgba(230, 57, 70, 0.1);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #ff4d5e;
+  font-size: 0.85rem;
+  list-style: none;
+}
+
+.errors-box li {
+  margin: 4px 0;
+}
+
+.modal-popover {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1a1a1a;
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 32px;
+  z-index: 1000;
+  width: 90%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.modal-popover::backdrop {
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+}
+
+.modal-popover h5 {
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  line-height: 1.8;
+  font-weight: 500;
+}
+
+.modal-popover input {
+  width: 100%;
+  padding: 12px 16px;
+  background: #141414;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+}
+
+.modal-popover input:focus {
+  outline: none;
+  border-color: #e63946;
+}
+
+.modal-popover button {
+  padding: 10px 20px;
+  background: #e63946;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.modal-popover button:hover {
+  background: #ff4d5e;
+}
+
+.modal-popover #close-button {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  background: transparent;
+  color: #a0a0a0;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.modal-popover #close-button:hover {
+  background: #e63946;
+  color: #fff;
+  border-color: #e63946;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+  .login-card h1 {
+    font-size: 1.3rem;
+  }
+}

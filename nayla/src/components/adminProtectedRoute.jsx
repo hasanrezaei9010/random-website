@@ -1,11 +1,12 @@
 import {Navigate} from 'react-router-dom';
 
- const AdminProtectedRoute = () => {
+ const AdminProtectedRoute = ({children}) => {
 const user = JSON.parse(localStorage.getItem('user'));
 
 if(!user || user.admin !== true) {
     return <Navigate to='/'/>
 }
-return children
+console.log(children)
+return children;
 }
 export default AdminProtectedRoute;

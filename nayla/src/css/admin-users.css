@@ -1,0 +1,76 @@
+.admin-users {
+  width: 100%;
+}
+
+.admin-users h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.admin-users .users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.user-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: var(--transition);
+}
+
+.user-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.user-card .user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-card .user-info span:first-child {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.user-card .user-info span:last-child {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  word-break: break-all;
+}
+
+.user-card button {
+  padding: 10px 16px;
+  background: rgba(230, 57, 70, 0.1);
+  color: var(--accent);
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  border-radius: var(--radius);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 8px;
+}
+
+.user-card button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+@media (max-width: 640px) {
+  .admin-users .users-grid {
+    grid-template-columns: 1fr;
+  }
+}

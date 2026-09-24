@@ -4,7 +4,9 @@ import AdminOrders from "./AdminOrders.jsx";
 import AdminProducts from "./AdminProducts.jsx";
 import AdminUsers from "./AdminUsers.jsx";
 import UploadProducts from "./UploadProducts.jsx";
-import "../css/admin.css";
+//import "../css/admin.css";
+import '../css/admin2.css';
+
 import {
   LineChart,
   Line,
@@ -64,7 +66,7 @@ export default class Admin extends Component {
   render() {
     return (
       <div className={this.state.background ? null : "dark"} id="father-of-all">
-        <header>
+        <header className="admin-header">
           <div className="header-div">
             <div>
               <i onClick={this.toggleSidebar} className="fa-solid fa-list"></i>
@@ -99,7 +101,7 @@ export default class Admin extends Component {
             </div>
           </div>
           <div className="pages">
-            <a href="">
+            <a href="" className="active">
               <i className="fa-solid fa-box-open"></i>
               <span>محصولات</span>
             </a>

@@ -1,5 +1,9 @@
+import {Component} from 'react';
+import '../css/edit-profile.css';
+
 export default class EditProfile extends Component {
   state = { name: '', email: '' };
+  
 
   componentDidMount() {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -24,7 +28,7 @@ export default class EditProfile extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit} className="edit-profile-form">
         <input value={this.state.name} onChange={e => this.setState({ name: e.target.value })} placeholder="نام" />
         <input value={this.state.email} onChange={e => this.setState({ email: e.target.value })} placeholder="ایمیل" />
         <button type="submit">ذخیره</button>

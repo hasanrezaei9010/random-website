@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { useNavigate, useLocation,useParams } from 'react-router-dom';
+import '../css/productdetail.css';
 
 export default function ProductDetail() {
 const [product,setProduct]=useState(null);

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { createRef } from "react";
 import { toast } from "react-toastify";
-import "../css/heading.css";
+/* import "../css/heading.css"; */
+import "../css/heading2.css";
 
 export default class Heading extends Component {
   state = {
@@ -55,13 +56,13 @@ export default class Heading extends Component {
         </div>
         <div className="slideicon">
           
-            <i onClick={()=>this.slider(1)} className="fa fa-circle"></i>
+            <i onClick={()=>this.slider(1)} className={`fa fa-circle ${this.state.activeIndex === 1 ? 'active' : ''}`}></i>
           
          
-            <i onClick={()=>this.slider(2)} className="fa fa-circle"></i>
+            <i onClick={()=>this.slider(2)} className={`fa fa-circle ${this.state.activeIndex === 2 ? 'active' : ''}`}></i>
           
           
-            <i onClick={()=>this.slider(3)} className="fa fa-circle"></i>
+            <i onClick={()=>this.slider(3)} className={`fa fa-circle ${this.state.activeIndex === 3 ? 'active' : ''}`}></i>
           
         </div>
       </div>

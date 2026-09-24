@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const timestamp = require('mongoose-timestamp');
 
 const schema = new mongoose.Schema({
 name : {type:String, required:true,unique:true},
@@ -15,7 +14,6 @@ resetCode:String,
 codeExpiry:String,
 resetToken:String
 });
-schema.plugin(timestamp);
 
 
 const User = mongoose.model("user",schema);

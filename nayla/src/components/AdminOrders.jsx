@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
+import '../css/admin-orders.css'
 
 export default class AdminOrders extends Component {
   state = { orders: [] };
@@ -7,14 +8,15 @@ export default class AdminOrders extends Component {
   componentDidMount() {
     try {
       const response = async () =>
-        await fetch("http://localhost:5000/api/order/all")
+        await fetch("http://localhost:5000/api/order/all",{
+       headers : {"x-auth-token" : localStorage.getItem('token')} }
+        )
           .then((res) => res.json())
           .then((data) => this.setState({ orders: data.data }));
-      const data = response.json();
-      if (data.ok) {
+      if (response.ok) {
         toast.success("با موفقیت آپدیت شد");
       } else {
-        console.log(data);
+        console.log(response);
         toast.error("خطایی رخ داده");
       }
     } catch (error) {
@@ -29,12 +31,14 @@ export default class AdminOrders extends Component {
         `http://localhost:5000/api/order/update/:${id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json" ,
+            "x-auth-token" : localStorage.getItem('token')
+          },
           body: JSON.stringify({ status }),
         },
       );
-      const data = response.json();
-      if (data.ok) {
+      const data = await response.json();
+      if (response.ok) {
         toast.success("با موفقیت آپدیت شد");
         this.componentDidMount(); // رفرش لیست
       } else {
@@ -49,7 +53,7 @@ export default class AdminOrders extends Component {
 
   render() {
     return (
-      <div>
+      <div className="admin-orders">
         <h2>مدیریت سفارشات</h2>
         {this.state.orders.map((order) => (
           <div key={order._id} className="order-admin-card">

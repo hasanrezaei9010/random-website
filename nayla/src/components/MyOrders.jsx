@@ -1,4 +1,7 @@
-class MyOrders extends Component {
+import {Component} from 'react';
+import '../css/myorders.css';
+
+export default class MyOrders extends Component {
   state = { orders: [], isLoading: true };
 
   componentDidMount() {
@@ -18,7 +21,7 @@ class MyOrders extends Component {
       <div className="my-orders">
         <h2>سفارشات من</h2>
         {this.state.orders.length === 0 ? (
-          <p>هنوز سفارشی ثبت نکرده‌اید.</p>
+          <p className='empty-text'>هنوز سفارشی ثبت نکرده‌اید.</p>
         ) : (
           this.state.orders.map(order => (
             <div key={order._id} className="order-card">
@@ -39,5 +42,3 @@ class MyOrders extends Component {
     );
   }
 }
-
-export default MyOrders;

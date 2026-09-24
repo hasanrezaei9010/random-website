@@ -11,12 +11,12 @@ const product = require("./product/product.js");
 const order = require("./order/order.js");
 const admin = require("./admin/admin.js");
 
-router.use("/admin", authenticated ,isAdmin, admin);
+router.use("/admin",authenticated ,isAdmin, admin);
 router.use("/auth", auth);
 router.use("/order", order);
 router.use('/product',product);
 router.use('/task',task);
-router.use('/user',authenticated ,user);
+router.use('/user',user);
 router.use(error);
 
 module.exports = router;

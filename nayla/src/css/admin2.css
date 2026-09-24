@@ -1,0 +1,286 @@
+#father-of-all {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 70px 1fr;
+  grid-template-areas:
+    "aside header"
+    "aside main";
+  transition: var(--transition);
+}
+
+#father-of-all.dark {
+  --bg-primary: #f5f5f5;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #1a1a1a;
+  --text-secondary: #666;
+  --border: #e0e0e0;
+}
+
+/* ============ Header ============ */
+#father-of-all header {
+  grid-area: header;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+#father-of-all header .header-div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#father-of-all header .header-div i {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+#father-of-all header .header-div i:hover {
+  background: var(--bg-card);
+  color: var(--accent);
+}
+
+#father-of-all header .header-div input[type="search"] {
+  width: 260px;
+  padding: 10px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+}
+
+#father-of-all header .header-div span {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+#father-of-all header .header-div button {
+  padding: 8px 16px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+#father-of-all header .header-div button:hover {
+  background: var(--accent-hover);
+}
+
+/* ============ Sidebar ============ */
+#father-of-all aside {
+  grid-area: aside;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--border);
+  padding: 20px 12px;
+  transition: var(--transition);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+#father-of-all aside.closed {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#father-of-all aside .admin-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+#father-of-all aside .admin-div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+#father-of-all aside .admin-div:first-child {
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 16px;
+  margin-bottom: 8px;
+}
+
+#father-of-all aside .admin-div img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+}
+
+#father-of-all aside .admin-div span {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+#father-of-all aside .admin-div span:first-of-type {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#father-of-all aside .pages {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#father-of-all aside .pages a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+#father-of-all aside .pages a i {
+  width: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#father-of-all aside .pages a:hover {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+
+#father-of-all aside .pages a.active,
+#father-of-all aside .pages a:hover {
+  background: rgba(230, 57, 70, 0.1);
+  color: var(--accent);
+}
+
+/* ============ Chart ============ */
+#chart {
+  grid-area: main;
+  padding: 32px;
+  padding-bottom: 0;
+}
+
+#chart .recharts-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.recharts-cartesian-axis-tick text {
+  fill: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.recharts-legend-item-text {
+  color: var(--text-primary) !important;
+}
+
+/* ============ Sections (Admin Components) ============ */
+#father-of-all > section:last-child {
+  grid-area: main;
+  padding: 0 32px 32px;
+  margin-top: 480px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+#father-of-all > section:last-child > div {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  min-height: 200px;
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 900px) {
+  #father-of-all {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "aside"
+      "main";
+  }
+
+  #father-of-all aside {
+    border-left: none;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    overflow-x: auto;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  #father-of-all aside.closed {
+    height: 0;
+    padding: 0;
+  }
+
+  #father-of-all aside .admin-section {
+    display: none;
+  }
+
+  #father-of-all aside .pages {
+    flex-direction: row;
+    gap: 4px;
+  }
+
+  #father-of-all aside .pages a {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  #father-of-all header .header-div input[type="search"] {
+    width: 160px;
+  }
+
+  #chart {
+    padding: 20px 16px;
+  }
+
+  #father-of-all > section:last-child {
+    grid-template-columns: 1fr;
+    padding: 0 16px 20px;
+    margin-top: 380px;
+  }
+}
+
+@media (max-width: 480px) {
+  #father-of-all header .header-div input[type="search"] {
+    display: none;
+  }
+
+  #chart {
+    padding: 16px 12px;
+  }
+
+  #father-of-all > section:last-child {
+    margin-top: 320px;
+  }
+}

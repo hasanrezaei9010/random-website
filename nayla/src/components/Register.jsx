@@ -3,7 +3,8 @@ import ReCAPTCHA from "react-google-recaptcha";
 import Context from "../context.js";
 import { toast } from "react-toastify";
 import { createRef } from "react";
-import "../css/register.css";
+import axios from 'axios';
+import "../css/register2.css";
 
 export default class Register extends React.Component {
   static contextType = Context;
@@ -31,7 +32,7 @@ export default class Register extends React.Component {
   register = async () => {
     this.setState({ sending: true });
     try {
-      const captchaResponse = await fetch(
+      /* const captchaResponse = await fetch(
         "http://localhost:5000/api/task/captcha",
         {
           method: "POST",
@@ -39,10 +40,10 @@ export default class Register extends React.Component {
           body: JSON.stringify({ token: this.state.token }),
         },
       );
-      if (captchaResponse.ok) {
+      if (captchaResponse.ok) { */
         const response = await axios.post(
           "http://localhost:5000/api/auth/register",
-          { name :this.name, email :this.email.trim(), password:this.password },
+          { name :this.name.current.value , email :this.email.current.value.trim(), password:this.password.current.value },
           { headers: { "custom-header": "value" } },
         );
 
@@ -55,13 +56,13 @@ export default class Register extends React.Component {
           this.setState({ errors: [...this.state.errors, response.message] });
           console.log(response);
         }
-      } else {
+      /* } else {
         alert("recaptcha failed :" + captchaResponse.message);
         this.setState({
           errors: ["recaptcha failed :" + captchaResponse.message],
         });
         console.log(captchaResponse);
-      }
+      } */
     } catch (error) {
       console.log(error);
       this.setState({ errors: [...this.state.errors, error.message] });
@@ -72,7 +73,7 @@ export default class Register extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="register-page">
         {this.state.errors.length > 0 ? (
           <ul style={{ backgroundColor: "red" }}>
             {this.state.errors.map((e, i) => (
@@ -81,7 +82,7 @@ export default class Register extends React.Component {
           </ul>
         ) : null}
 
-        <div className="register" id="register">
+        <div className="register register-card" id="register">
           <h1>خوش آمدید</h1>
           <div className="input-group">
             <input ref={this.name} id="username" type="text" placeholder="" />
@@ -100,17 +101,19 @@ export default class Register extends React.Component {
               ثبت نام
             </button>
           </div>
+          <div className="recaptcha-wrapper">
           <ReCAPTCHA
             sitekey="dhhghgh"
             onChange={(t) => this.setState({ token: t })}
           />
+          </div>
           <div className="span-group">
             <span>
               قبلا حساب ساخته اید؟ <a href="/login">ورود </a>
             </span>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

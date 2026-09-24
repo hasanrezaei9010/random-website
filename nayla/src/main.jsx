@@ -6,11 +6,9 @@ import ReactDOM from "react-dom";
 import "./css/index.css";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </StrictMode>,
 );
 
 //ReactDOM.render(<App/>,document.getElementById("root"));

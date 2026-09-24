@@ -11,16 +11,21 @@ module.exports = new (class extends controller {
   // گرفتن همه محصولات
   async getAllProducts(req, res) {
     try {
+      const cached = cache.get('products');
+      if (cached) return res.json({ data: cached });
+
+      const products = await Product.find();
+      if (products) {
+        cache.set('products', products);
+        res.json({ message: 'products sent succesfully', data: products });
+      } else {
+        console.log('can not find any product')
+        res.json({ message: 'can not find any product' })
+      }
 
     } catch (error) {
-
+      console.error(error)
     }
-    const cached = cache.get('products');
-    if (cached) return res.json({ data: cached });
-
-    const products = await Product.find();
-    cache.set('products', products);
-    res.json({ data: products });
   }
 
   // اضافه کردن محصول
@@ -56,14 +61,14 @@ module.exports = new (class extends controller {
   // ویرایش محصول
   async updateProduct(req, res) {
     try {
-      const {name , picture ,description ,price} = req.body.product;
+      const { name, picture, description, price } = req.body.product;
       const product = await Product.findById(req.params.id);
-      if(name) product.name = name;
-      if(picture) product.picture = picture;
-      if(description) product.description = description;
-      if(price) product.price = price;
+      if (name) product.name = name;
+      if (picture) product.picture = picture;
+      if (description) product.description = description;
+      if (price) product.price = price;
       product.save()
-      res.json({message:'محصول با موفقیت به روز شد', data: product });
+      res.json({ message: 'محصول با موفقیت به روز شد', data: product });
     } catch (error) {
       console.error(error)
       const err = new Error('مشکل داخلی سرور');
