@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const User = require("../../models/user.js");
+const Notification = require('../../models/notification.js');
 
 module.exports = new (class extends controller {
   async captcha(req, res) {
@@ -92,26 +93,21 @@ module.exports = new (class extends controller {
   }
 
   async passVerify(req, res) {
-    console.log("1")
     const { resetCode, email } = req.body;
     const newPassword = req.body.newPassword.trim().toLowerCase();
     const { resetToken } = req.cookies;
-    console.log("2")
 
-
-    const user = await this.User.findOne({email});
+    const user = await this.User.findOne({ email });
     if (!user) return res.status(401).json({ message: "درخواست نامعتبر" });
-    console.log("3")
     console.log(user)
     if (user.resetCode !== resetCode)
       return res.status(404).json({ message: "کد اشتباه است" });
-    console.log("4")
 
     if (Date.now() > user.codeExpiry) {
       user.codeExpiry = "";
       return res.status(400).json({ message: "کد منقضی شده" });
     }
-    if(await bcrypt.compare(user.password,newPassword)) return this.response({res,message:"رمز قبلی و جدید نمی تواند یکسان باشد"});
+    if (await bcrypt.compare(user.password, newPassword)) return this.response({ res, message: "رمز قبلی و جدید نمی تواند یکسان باشد" });
     const salt = await bcrypt.genSalt(10);
     user.password = await bcrypt.hash(newPassword, salt);
 
@@ -124,4 +120,32 @@ module.exports = new (class extends controller {
     res.clearCookie("resetToken");
     this.response({ res, message: "کد تایید شد و رمز تغییر کرد" });
   }
+
+  // دریافت اعلان‌های کاربر
+  async getNotifications(req, res) {
+    try {
+      const notifications = await Notification.find({ idRead: false })
+        .sort({ date: -1 });
+
+      if (notifications) {
+        await Notification.updateMany({ idRead: false },{isRead : true})
+        this.response({
+          res,
+          code: 200,
+          message: 'notifications sent',
+          data: notifications
+        });
+      } else {
+        this.response({
+          res,
+          code: 500,
+          message: 'no notification',
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      this.response({ res, code: 500, message: error.message });
+    }
+  }
+
 })();

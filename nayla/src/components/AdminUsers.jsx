@@ -7,7 +7,10 @@ export default class AdminUsers extends Component {
 
   fetchAll = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user/all");
+      const response = await fetch("http://localhost:5000/api/user/all",{
+        method : 'GET',
+        headers :{ "x-auth-token": localStorage.getItem("token")}
+      });
       const data = await response.json();
       console.log("data is here", data);
       if (response.ok) {
@@ -29,6 +32,7 @@ export default class AdminUsers extends Component {
   toggleAdmin = async (id) => {
     await fetch(`http://localhost:5000/api/user/${id}/toggle-admin`, {
       method: "PUT",
+      headers :{ "x-auth-token": localStorage.getItem("token")}
     });
     this.componentDidMount();
   };

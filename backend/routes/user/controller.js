@@ -26,13 +26,19 @@ module.exports = new (class extends controller {
   }
 
   async editProfile(req, res) {
-    const { name, email } = req.body;
+    try {
+      const { name, email } = req.body;
     const user = await User.findByIdAndUpdate(
       req.user._id,
       { name, email },
       { new: true }
     );
     res.json({ data: user });
+    } catch (error) {
+      res.json({ message: error });
+      console.error(error)
+    }
+    
   }
 
   async fetchAllUsers(req,res) {

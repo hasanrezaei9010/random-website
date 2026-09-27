@@ -5,9 +5,8 @@ export default class MyOrders extends Component {
   state = { orders: [], isLoading: true };
 
   componentDidMount() {
-    const token = localStorage.getItem('token');
     fetch('http://localhost:5000/api/order/my-orders', {
-      headers: { 'x-auth-token': token }
+      headers: {  "x-auth-token": localStorage.getItem("token") }
     })
       .then(res => res.json())
       .then(data => this.setState({ orders: data.data, isLoading: false }))

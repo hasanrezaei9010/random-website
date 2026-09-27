@@ -1,5 +1,6 @@
 const controller = require("../controller.js");
 const Order = require("../../models/order.js");
+const Notification = require("../../models/notification.js");
 
 module.exports = new (class extends controller {
   // متد ۱: ساخت سفارش و دریافت لینک پرداخت
@@ -63,6 +64,7 @@ module.exports = new (class extends controller {
         order.status = 'paid';
         await order.save();
         res.redirect(`http://localhost:3000/payment/success/${order._id}`);
+
       } else {
         res.redirect('http://localhost:3000/payment/failed');
       }

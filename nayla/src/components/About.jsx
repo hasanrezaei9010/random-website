@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/about-red.css";
+import "../css/about.css";
 
 export default class About extends Component {
   render() {

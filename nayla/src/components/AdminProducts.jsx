@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import '../css/admin-products.css';
+import "../css/admin-products.css";
 
 export default class AdminProducts extends Component {
   state = {
     products: [],
     updatedProduct: { name: "", picture: "", description: "", price: "" },
+    search: "",
+    updatedProductId: null
   };
 
   componentDidMount() {
@@ -59,7 +61,7 @@ export default class AdminProducts extends Component {
         `http://localhost:5000/api/admin/update/${id}`,
         {
           method: "PUT",
-          headers : {"x-auth-token" : localStorage.getItem('token')},
+          headers: { "x-auth-token": localStorage.getItem("token") },
           body: JSON.stringify((product = this.state.updatedProduct)),
         },
       );
@@ -77,89 +79,104 @@ export default class AdminProducts extends Component {
     }
   };
 
+  handleSearch = async (e) => {
+    this.setState({ search: e.target.value });
+  };
+
+  handleSomething = async (e, field) => {
+    this.setState((prevState) => ({
+      ...prevState.updatedProduct,
+      [field]: e.target.value,
+    }));
+  };
+
+  handleFilething = async (e, field) => {
+    this.setState((prevState) => ({
+      ...prevState.updatedProduct,
+      [field]: e.target.files[0],
+    }));
+  };
+
   render() {
+    const filtered = this.state.products.filter((p) =>
+      p.name.toLowerCase().includes(this.state.search.toLowerCase()),
+    );
     return (
       <div className="admin-products">
         <h2>مدیریت محصولات</h2>
         <div className="table-wrapper">
-        <table>
-          <thead>
-            <tr>
-              <th>نام</th>
-              <th>قیمت</th>
-              <th>عملیات</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.products.map((p) => (
-              <tr key={p._id}>
-                <td>{p.picture}</td>
-                <td>{p.name}</td>
-                <td>{p.price}</td>
-                <td>
-                  <button className="btn-delete" onClick={() => this.handleDelete(p._id)}>حذف</button>
-                  <button
-                  className="btn-edit"
-                    popoverTarget="update-product"
-                    popoverTargetAction="show"
-                  >
-                    ویرایش
-                  </button>
-                </td>
-                <dialog id="update-product" className="update-popover" popover="manual">
-                  <input
-                    onChange={(e) =>
-                      this.setState((prevState) => ({
-                        ...prevState.updatedProduct,
-                        name: e.target.value,
-                      }))
-                    }
-                    type="text"
-                    name=""
-                    id=""
-                  />
-                  <input
-                    onChange={(e) =>
-                      this.setState((prevState) => ({
-                        ...prevState.updatedProduct,
-                        picture: e.target.value,
-                      }))
-                    }
-                    type="file"
-                    name=""
-                    id=""
-                  />
-                  <input
-                    onChange={(e) =>
-                      this.setState((prevState) => ({
-                        ...prevState.updatedProduct,
-                        description: e.target.value,
-                      }))
-                    }
-                    type="text"
-                    name=""
-                    id=""
-                  />
-                  <input
-                    onChange={(e) =>
-                      this.setState((prevState) => ({
-                        ...prevState.updatedProduct,
-                        price: e.target.value,
-                      }))
-                    }
-                    type="number"
-                    name=""
-                    id=""
-                  />
-                  <button onClick={() => this.handleUpdate(p._id)}>
-                    ارسال
-                  </button>
-                </dialog>
+          <input
+            type="search"
+            onChange={(e) => this.handleSearch(e)}
+            placeholder="جستجو"
+          />
+          <table>
+            <thead>
+              <tr>
+                <th>نام</th>
+                <th>قیمت</th>
+                <th>عملیات</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((p) => (
+                <tr key={p._id}>
+                  <td>{p.picture}</td>
+                  <td>{p.name}</td>
+                  <td>{p.price}</td>
+                  <td>
+                    <button
+                      className="btn-delete"
+                      onClick={() => this.handleDelete(p._id)}
+                    >
+                      حذف
+                    </button>
+                    <button
+                      className="btn-edit"
+                      popoverTarget="update-product"
+                      popoverTargetAction="show"
+                      onClick={() => {
+                        this.setState({
+                          updatedProductId : p._id,
+                          updatedProduct : {...p}
+                        })
+                      }}
+                    >
+                      ویرایش
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
+        <dialog id="update-product" className="update-popover" popover="manual">
+          <input
+            onChange={(e) => this.handleSomethinElse(e, "name")}
+            type="text"
+            name="name"
+            value={this.state.updatedProduct.name}
+          />
+          <input
+            onChange={(e) => this.handleFilething(e, "picture")}
+            type="file"
+            name="picture"
+            value={this.state.updatedProduct.picture}
+          />
+          <input
+            onChange={(e) => this.handleSomething(e, "description")}
+            type="text"
+            name="description"
+            value={this.state.updatedProduct.description}
+          />
+          <input
+            onChange={(e) => this.handleSomething(e, "price")}
+            type="number"
+            name="price"
+            value={this.state.updatedProduct.price}
+          />
+          <button onClick={() => this.handleUpdate(this.state.updatedProductId)}>ارسال</button>
+        </dialog>
       </div>
     );
   }

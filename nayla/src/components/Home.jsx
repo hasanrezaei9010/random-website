@@ -64,7 +64,12 @@ class Home extends Component {
                 سواری با <span>استایل</span>
               </h1>
               <p>موتورسیکلت‌های اصل، با طراحی بی‌نظیر</p>
-              <button className="btn-primary">کاتالوگ</button>
+              <button
+                onClick={() => this.props.navigate("/about")}
+                className="btn-primary"
+              >
+                کاتالوگ
+              </button>
             </div>
           </section>
           <section className="stats">
@@ -97,15 +102,7 @@ class Home extends Component {
               {this.state.products
                 ? this.state.products.map((product) => (
                     <SwiperSlide key={product._id}>
-                      <div
-                        className="product-card"
-                        onClick={() =>{
-                          console.log('clicked',product._id);
-                          this.props.navigate(`/product/${product._id}`, {
-                            state: { product }
-                          })}
-                        }
-                      >
+                      <div className="product-card">
                         <img
                           className="card-img-placeholder"
                           src={product.picture}
@@ -115,7 +112,16 @@ class Home extends Component {
                         <h3>{product.name}</h3>
                         <p>{product.description}</p>
                         <span className="price">{product.price}</span>
-                        <button className="btn-outline">مشاهده</button>
+                        <button
+                          onClick={() => {
+                            this.props.navigate(`/product/${product._id}`, {
+                              state: { product },
+                            });
+                          }}
+                          className="btn-outline"
+                        >
+                          مشاهده
+                        </button>
                       </div>
                     </SwiperSlide>
                   ))
@@ -130,6 +136,6 @@ class Home extends Component {
 }
 
 export default function HomeWrapper() {
-const navigate = useNavigate();
-return <Home navigate={navigate}/>
+  const navigate = useNavigate();
+  return <Home navigate={navigate} />;
 }

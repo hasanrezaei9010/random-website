@@ -142,18 +142,7 @@ class Login extends Component {
               />
               <label htmlFor="password">رمز</label>
             </div>
-
-            <div className="button-group mb-3">
-              <button
-                disabled={this.state.sending}
-                className="btn-login"
-                onClick={this.Login}
-              >
-                ورود
-              </button>
-            </div>
-          
-
+            
           <div className="forgot-row">
               <button popoverTarget="recovery-group" popoverTargetAction="show">
                رمز را فراموش کردم

@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {toast} from 'react-toastify';
 import '../css/edit-profile.css';
 
 export default class EditProfile extends Component {
@@ -19,11 +20,11 @@ export default class EditProfile extends Component {
         'Content-Type': 'application/json',
         'x-auth-token': token
       },
-      body: JSON.stringify(this.state)
+      body: JSON.stringify({name : this.state.name , email : this.state.email})
     });
     const data = await res.json();
     localStorage.setItem('user', JSON.stringify(data.data));
-    alert('پروفایل به‌روزرسانی شد');
+    toast.success('پروفایل به‌روزرسانی شد');
   };
 
   render() {

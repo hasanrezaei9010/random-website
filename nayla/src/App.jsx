@@ -12,9 +12,11 @@ const ProductDetail = lazy(() => import("./components/ProductDetail.jsx"));
 const AdminProtectedRoute = lazy(
   () => import("./components/AdminProtectedRoute.jsx"),
 );
-/*const Home = lazy(() => import ("./components/Home.jsx"));
-const Home = lazy(() => import ("./components/Home.jsx"));
-const Home = lazy(() => import ("./components/Home.jsx")); */
+const Dashboard = lazy(() => import ("./components/UserDashboard.jsx"));
+const AdminUsers = lazy(() => import ("./components/AdminUsers.jsx"));
+const AdminOrders = lazy(() => import ("./components/AdminOrders.jsx"));
+const AdminProducts = lazy(() => import ("./components/AdminProducts.jsx"));
+const UploadProducts = lazy(() => import ("./components/UploadProducts.jsx"));
 import Context from "./context.js";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import About from "./components/About.jsx";
@@ -47,9 +49,13 @@ export default function App() {
             <Route path="/knowledge" element={<Knowledge />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/adminusers" element={<AdminUsers />} />
+            <Route path="/adminorders" element={<AdminOrders />} />
+            <Route path="/adminproducts" element={<AdminProducts />} />
+            <Route path="/uploadproducts" element={<UploadProducts />} />
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetail />} />
-
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route

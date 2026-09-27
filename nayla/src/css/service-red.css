@@ -1,8 +1,0 @@
-.services-page { background: #ffffff; padding: 40px 60px; text-align: center; }
-.services-page h1 { color: #2d2d2d; }
-.subtitle { color: #777; margin-bottom: 30px; }
-.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.service-card { background: #f9f9f9; padding: 20px; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-.service-icon { font-size: 2.5rem; display: block; margin-bottom: 10px; }
-.service-card h3 { color: #b22234; }
-.service-card p { color: #555; }

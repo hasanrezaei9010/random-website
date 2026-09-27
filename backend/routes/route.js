@@ -13,10 +13,10 @@ const admin = require("./admin/admin.js");
 
 router.use("/admin",authenticated ,isAdmin, admin);
 router.use("/auth", auth);
-router.use("/order", order);
+router.use("/order",authenticated, order);
 router.use('/product',product);
 router.use('/task',task);
-router.use('/user',user);
+router.use('/user',authenticated ,user);
 router.use(error);
 
 module.exports = router;
