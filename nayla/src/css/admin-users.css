@@ -1,5 +1,6 @@
 .admin-users {
   width: 100%;
+  margin: 10px 0px;
 }
 
 .admin-users h2 {
@@ -8,6 +9,8 @@
   color: var(--text-primary);
   margin-bottom: 20px;
   letter-spacing: -0.5px;
+  border-bottom: 1px solid var(--danger);
+  padding: 10px;
 }
 
 .admin-users .users-grid {

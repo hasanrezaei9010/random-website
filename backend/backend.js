@@ -62,12 +62,15 @@ logger.info("tetsing") */
 
 process.on("uncaughtException",(ex)=>{
     debug("an uncaughtException has occured");
-    logger.info(ex.message);
+    /* logger.info(ex.message); */
+    console.log('uncaughtException has occured : ',ex.message);
     process.exit(1);
 })
+
 process.on("unhandledRejection",(ex)=>{
     debug("an unhandledRejection has occured");
-    logger.info(ex.message);
+    /* logger.info(ex.message); */
+    console.log('unhandledRejection has occured : ',ex.message)
     process.exit(1);
 })
 

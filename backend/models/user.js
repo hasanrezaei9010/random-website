@@ -7,9 +7,7 @@ email : {type:String,required :true,unique:true},
 password: {type:String,required:true},
 date: {type:Date, default: Date.now},
 admin : {type:Boolean},
-picture : {type:String,required:function(){
-    return this.admin === true;
-}},
+picture : {type:String},
 resetCode:String,
 codeExpiry:String,
 resetToken:String

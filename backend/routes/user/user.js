@@ -8,8 +8,8 @@ router.get("/recieve",
 router.get("/edit",
     controller.editProfile
 );
-router.get("/all",
-    controller.fetchAllUsers
+router.get("/admin",
+    controller.fetchAdmin
 );
 
 

@@ -11,17 +11,14 @@ export default class UserDashboard extends Component {
         <h1>پنل کاربری</h1>
         
         <div>
-          <h2 className="section-title">سفارشات من</h2>
           <MyOrders />
         </div>
         
         <div>
-          <h2 className="section-title">ویرایش پروفایل</h2>
           <EditProfile />
         </div>
 
         <div>
-          <h2 className="section-title">سبد خرید</h2>
           <Cart />
         </div>
       </div>

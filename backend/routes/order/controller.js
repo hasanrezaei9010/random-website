@@ -142,3 +142,154 @@ module.exports = new (class extends controller {
   }
 
 })();
+
+/* const maker = async()=> { 
+  await  Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbe716a611414e18f811d',
+      quantity : 1,
+      price : 4000
+    }],
+    totalPrice : 4000  ,
+    status : 'paid' ,
+    date : new Date("2026-09-21T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbcdc98ac6986b3e00462',
+      quantity : 2,
+      price : 2500
+    }],
+    totalPrice : 5000  ,
+    status : 'paid' ,
+  date : new Date("2026-09-30T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbcdc98ac6986b3e00462',
+      quantity : 1,
+      price : 2500
+    }],
+    totalPrice : 2500  ,
+    status : 'paid' ,
+date : new Date("2026-09-30T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbcdc98ac6986b3e00462',
+      quantity : 2,
+      price : 2500
+    }],
+    totalPrice : 5000  ,
+    status : 'paid' ,
+date : new Date("2026-09-28T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbe716a611414e18f811c',
+      quantity : 3,
+      price : 3000
+    }],
+    totalPrice : 9000  ,
+    status : 'paid' ,
+date : new Date("2026-09-27T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbe716a611414e18f811c',
+      quantity : 1,
+      price : 3000
+    }],
+    totalPrice : 3000  ,
+    status : 'paid' ,
+date : new Date("2026-09-25T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbcdc98ac6986b3e00462',
+      quantity : 2,
+      price : 2500
+    }],
+    totalPrice : 5000  ,
+    status : 'paid' ,
+date : new Date("2026-09-23T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbcdc98ac6986b3e00462',
+      quantity : 2,
+      price : 2500
+    }],
+    totalPrice : 5000  ,
+    status : 'paid' ,
+date : new Date("2026-09-23T10:30:00Z")
+  })
+  await Order.create({
+    user :'6ab2e88d206d249009436ebf',
+    customer:{
+      name : "ali" ,
+      address : "ali" ,
+      phone:  +9809132716113
+    },
+    items :[{
+      product : '6a8dbcdc98ac6986b3e00462',
+      quantity : 1,
+      price : 2500
+    }],
+    totalPrice : 2500  ,
+    status : 'paid' ,
+date : new Date("2026-09-22T10:30:00Z")
+  })
+
+
+}
+
+maker() */

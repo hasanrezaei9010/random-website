@@ -8,6 +8,8 @@
   color: var(--text-primary);
   margin-bottom: 20px;
   letter-spacing: -0.5px;
+  border-bottom: 1px solid var(--danger);
+  padding: 10px;
 }
 
 .admin-products .table-wrapper {

@@ -10,6 +10,14 @@
   gap: 14px;
 }
 
+.edit-profile-form h2 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
 .edit-profile-form input {
   width: 100%;
   padding: 14px 16px;
@@ -53,82 +61,4 @@
     margin: 20px 16px;
     padding: 24px 20px;
   }
-}
-
-
-
-
-.upload-product-form {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.upload-product-form::before {
-  content: 'افزودن محصول جدید';
-  display: block;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-  letter-spacing: -0.5px;
-}
-
-.upload-product-form input[type="text"],
-.upload-product-form input[type="number"],
-.upload-product-form input:not([type]) {
-  width: 100%;
-  padding: 12px 16px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  color: var(--text-primary);
-  font-family: inherit;
-  font-size: 0.95rem;
-  transition: var(--transition);
-}
-
-.upload-product-form input:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.15);
-}
-
-.upload-product-form input[type="file"] {
-  padding: 10px;
-  background: var(--bg-secondary);
-  border: 1px dashed var(--border);
-  border-radius: var(--radius);
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: var(--transition);
-}
-
-.upload-product-form input[type="file"]:hover {
-  border-color: var(--accent);
-}
-
-.upload-product-form button {
-  padding: 14px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  font-size: 1rem;
-  font-weight: 700;
-  font-family: inherit;
-  cursor: pointer;
-  transition: var(--transition);
-  margin-top: 8px;
-}
-
-.upload-product-form button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.35);
 }

@@ -1,19 +1,19 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
-import '../css/admin-orders.css'
+import "../css/admin-orders.css";
 
 export default class AdminOrders extends Component {
   state = { orders: [] };
 
-  componentDidMount() {
+  fetchOrders = async () => {
     try {
-      const response = async () =>
-        await fetch("http://localhost:5000/api/order/all",{
-       headers : {"x-auth-token" : localStorage.getItem('token')} }
-        )
-          .then((res) => res.json())
-          .then((data) => this.setState({ orders: data.data }));
+      const response = await fetch("http://localhost:5000/api/order/all", {
+        headers: { "x-auth-token": localStorage.getItem("token") },
+      });
+      const data = await response.json();
+
       if (response.ok) {
+        this.setState({ orders: data.data });
         toast.success("با موفقیت آپدیت شد");
       } else {
         console.log(response);
@@ -23,16 +23,21 @@ export default class AdminOrders extends Component {
       console.error(error);
       toast.error("خطا در برقراری ارتباط");
     }
+  };
+
+  componentDidMount() {
+    this.fetchOrders();
   }
 
   updateStatus = async (id, status) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/order/update/:${id}`,
+        `http://localhost:5000/api/order/update/${id}`,
         {
           method: "PUT",
-          headers: { "Content-Type": "application/json" ,
-            "x-auth-token" : localStorage.getItem('token')
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
           },
           body: JSON.stringify({ status }),
         },
@@ -57,8 +62,19 @@ export default class AdminOrders extends Component {
         <h2>مدیریت سفارشات</h2>
         {this.state.orders.map((order) => (
           <div key={order._id} className="order-admin-card">
-            <span>سفارش {order._id}</span>
-            <span>وضعیت: {order.status}</span>
+            <div className="order-detail">
+              <span>سفارش {order._id}</span>
+              <span>وضعیت: {order.status}</span>
+            </div>
+            <div className="order-detail">
+              <span>سقارش دهنده {order.customer.name}</span>
+              <span>آدرس: {order.customer.address}</span>
+            </div>
+            <div className="order-detail">
+              <span>هزینه نهایی {order.totalPrice}</span>
+              <span>شناسه پرداخت: {order.paymentId}</span>
+            </div>
+
             <select
               onChange={(e) => this.updateStatus(order._id, e.target.value)}
               value={order.status}

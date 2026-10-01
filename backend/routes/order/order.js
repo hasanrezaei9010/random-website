@@ -21,7 +21,7 @@ router.get("/all",
     controller.allOrders
 );
 
-router.put('update',
+router.put('/update/:id',
     controller.updateOrder
 );
 

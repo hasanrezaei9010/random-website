@@ -41,16 +41,17 @@ module.exports = new (class extends controller {
     
   }
 
-  async fetchAllUsers(req,res) {
+  async fetchAdmin(req,res) {
     try {
-      const users = await this.User.find();
-      if (users) {
+      const admins = await this.User.find({admin : true});
+      if (admins) {
         this.response({
           res,
           code: 200,
           message: "users sent successfully",
-          data: users
+          data: admins
         })
+        console.log(admins)
       } else {
         this.response({
           res,

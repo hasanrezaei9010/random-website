@@ -3,10 +3,12 @@ const router = express.Router();
 const controller = require("./controller.js");
 const {body} = require("express-validator");
 
-// product related routes
+
+//endpoint related to PRODUCTS
 router.get('/all',
     controller.getAllProducts
 );
+
 router.post('/add',[
  body('name').isLength({min :3}).withMessage('نام باید حداقل دارای سه حرف باشد'),
  body('price').isNumeric().withMessage('قیمت باید به عدد باشد'),
@@ -15,14 +17,28 @@ router.post('/add',[
     controller.addProduct
 );
 
-router.delete('/delete',
+router.delete('/delete/:id',
     controller.deleteProduct
 );
 
-//order related routes
-
-router.put('/update',
+router.put('/update/:id',
     controller.updateProduct
+);
+
+//endpoints related to USERS
+
+router.put('/add',
+    controller.addAdmin
+);
+
+router.put('/remove/:id',
+    controller.removeAdmin
+);
+
+//endpoints related to ORDERS
+
+router.get('/weekly-sales',
+    controller.getWeeklySales
 );
 
 module.exports = router;

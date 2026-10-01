@@ -29,11 +29,14 @@ export default class EditProfile extends Component {
 
   render() {
     return (
+      <>
+      <h2>ویرایش پروفایل</h2>
       <form onSubmit={this.handleSubmit} className="edit-profile-form">
         <input value={this.state.name} onChange={e => this.setState({ name: e.target.value })} placeholder="نام" />
         <input value={this.state.email} onChange={e => this.setState({ email: e.target.value })} placeholder="ایمیل" />
         <button type="submit">ذخیره</button>
       </form>
+      </>
     );
   }
 }

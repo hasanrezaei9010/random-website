@@ -5,9 +5,9 @@ import "../css/admin-products.css";
 export default class AdminProducts extends Component {
   state = {
     products: [],
-    updatedProduct: { name: "", picture: "", description: "", price: "" },
+    updatedProduct: {},
     search: "",
-    updatedProductId: null
+    updatedProductId: null,
   };
 
   componentDidMount() {
@@ -24,7 +24,7 @@ export default class AdminProducts extends Component {
       if (response.ok) {
         this.setState({ products: data.data });
       } else {
-        console.log(response);
+        console.log(data);
       }
     } catch (error) {
       console.error(error);
@@ -47,7 +47,7 @@ export default class AdminProducts extends Component {
         this.fetchProducts();
       } else {
         console.log(data);
-        toast.error("خطایی رخ داده");
+        toast.error(data.message);
       }
     } catch (error) {
       console.error(error);
@@ -71,7 +71,7 @@ export default class AdminProducts extends Component {
         this.fetchProducts();
       } else {
         console.log(data);
-        toast.error("خطایی رخ داده");
+        toast.error(data.message);
       }
     } catch (error) {
       console.error(error);
@@ -79,35 +79,17 @@ export default class AdminProducts extends Component {
     }
   };
 
-  handleSearch = async (e) => {
-    this.setState({ search: e.target.value });
-  };
-
-  handleSomething = async (e, field) => {
-    this.setState((prevState) => ({
-      ...prevState.updatedProduct,
-      [field]: e.target.value,
-    }));
-  };
-
-  handleFilething = async (e, field) => {
-    this.setState((prevState) => ({
-      ...prevState.updatedProduct,
-      [field]: e.target.files[0],
-    }));
-  };
-
   render() {
     const filtered = this.state.products.filter((p) =>
       p.name.toLowerCase().includes(this.state.search.toLowerCase()),
-    );
+    ) || this.state.products ;
     return (
       <div className="admin-products">
         <h2>مدیریت محصولات</h2>
         <div className="table-wrapper">
           <input
             type="search"
-            onChange={(e) => this.handleSearch(e)}
+            onChange={(e) => this.setState({ search: e.target.value })}
             placeholder="جستجو"
           />
           <table>
@@ -137,9 +119,9 @@ export default class AdminProducts extends Component {
                       popoverTargetAction="show"
                       onClick={() => {
                         this.setState({
-                          updatedProductId : p._id,
-                          updatedProduct : {...p}
-                        })
+                          updatedProductId: p._id,
+                          updatedProduct: { ...p },
+                        });
                       }}
                     >
                       ویرایش
@@ -152,30 +134,66 @@ export default class AdminProducts extends Component {
         </div>
         <dialog id="update-product" className="update-popover" popover="manual">
           <input
-            onChange={(e) => this.handleSomethinElse(e, "name")}
+            onChange={(e) =>
+              this.setState((prevState) => ({
+                updatedProduct: {
+                  ...prevState.updatedProduct,
+                  name: e.target.value,
+                },
+              }))
+            }
             type="text"
             name="name"
             value={this.state.updatedProduct.name}
+            placeholder="نام محصول"
           />
           <input
-            onChange={(e) => this.handleFilething(e, "picture")}
+            onChange={(e) =>
+              this.setState((prevState) => ({
+                updatedProduct: {
+                  ...prevState.updatedProduct,
+                  picture: e.target.files[0],
+                },
+              }))
+            }
             type="file"
             name="picture"
             value={this.state.updatedProduct.picture}
+            placeholder="تصویر محصول را بارگذاری کنید"
           />
           <input
-            onChange={(e) => this.handleSomething(e, "description")}
+            onChange={(e) =>
+              this.setState((prevState) => ({
+                updatedProduct: {
+                  ...prevState.updatedProduct,
+                  description: e.target.value,
+                },
+              }))
+            }
             type="text"
             name="description"
             value={this.state.updatedProduct.description}
+            placeholder="توضیحات محصول"
           />
           <input
-            onChange={(e) => this.handleSomething(e, "price")}
+            onChange={(e) =>
+              this.setState((prevState) => ({
+                updatedProduct: {
+                  ...prevState.updatedProduct,
+                  price: e.target.value,
+                },
+              }))
+            }
             type="number"
             name="price"
             value={this.state.updatedProduct.price}
+            placeholder="قیمت محصول"
           />
-          <button onClick={() => this.handleUpdate(this.state.updatedProductId)}>ارسال</button>
+          <button
+            onClick={() => this.handleUpdate(this.state.updatedProductId)}
+          >
+            ارسال
+          </button>
         </dialog>
       </div>
     );

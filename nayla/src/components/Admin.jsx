@@ -18,21 +18,14 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-const data = [
-  { name: "شنبه", sales: 4000 },
-  { name: "یکشنبه", sales: 3000 },
-  { name: "دوشنبه", sales: 2000 },
-  { name: "سه شنبه", sales: 2700 },
-  { name: "چهار شنبه", sales: 3850 },
-];
 
 class Admin extends Component {
   state = {
     background: true,
     admin: null,
     asideListOpen: true,
-    activeTab: "products",
     notifications: [],
+    chartData: [],
   };
 
   toggleSidebar = () => {
@@ -46,8 +39,9 @@ class Admin extends Component {
     try {
       const response = await fetch("http://localhost:5000/api/user/recieve", {
         method: "GET",
-        headers: { "Content-Type": "application/json" ,
-           "x-auth-token": localStorage.getItem("token")
+        headers: {
+          "Content-Type": "application/json",
+          "x-auth-token": localStorage.getItem("token"),
         },
       });
       const finalResponse = await response.json();
@@ -55,12 +49,29 @@ class Admin extends Component {
         this.setState({
           admin: finalResponse.data,
         });
-        console.log("users recieved successfully");
       } else {
         console.log("failed to fetch user", finalResponse);
       }
     } catch (error) {
       console.log("connection to the server failed", error);
+    }
+  };
+
+  fetchChartData = async () => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/admin/weekly-sales",
+        {
+          method: "GET",
+          headers: { "x-auth-token": localStorage.getItem("token") },
+        },
+      );
+      const data = await response.json();
+      if (response.ok) {
+        this.setState({ chartData: data.data });
+      }
+    } catch (error) {
+      console.log("failed to fetch chart data", error);
     }
   };
 
@@ -74,13 +85,17 @@ class Admin extends Component {
     try {
       const response = await fetch(
         "http://localhost:5000/api/task/notification",
-        { method : "GET",
-          headers: { "Content-Type" : "application/json"},
-        }
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "x-auth-token": localStorage.getItem("token"),
+          },
+        },
       );
       const data = await response.json();
       if (response.ok) {
-        this.setState({ notifications: data.data.notifications });
+        this.setState({ notifications: data.data.notifications || [] });
       }
     } catch (error) {
       console.log(error);
@@ -90,6 +105,7 @@ class Admin extends Component {
   componentDidMount() {
     this.fetchUser();
     this.fetchNotifications();
+    this.fetchChartData();
   }
 
   render() {
@@ -98,29 +114,40 @@ class Admin extends Component {
         <header className="admin-header">
           <div className="header-div">
             <div>
-              <i onClick={this.toggleSidebar} className="fa-solid fa-list"></i>
-              <i
-                onClick={this.handleLogout}
-                className="fa-solid fa-power-off"
-              ></i>
-              <span className="bell-wrapper">
+              <div className="icons">
                 <i
-                  className="fa-solid fa-bell"
+                  onClick={this.toggleSidebar}
+                  className="fa-solid fa-list"
+                ></i>
+                <em className="icon-name">لیست</em>
+              </div>
+              <div className="icons">
+                <i
+                  onClick={this.handleLogout}
+                  className="fa-solid fa-power-off"
+                ></i>
+                <em className="icon-name">خروج</em>
+              </div>
+              <div className="icons">
+                <button
+                  id="bell-wrapper"
                   onClick={this.fetchNotifications}
                   popoverTarget="notif-popover"
                   popoverTargetAction="toggle"
-                ></i>
-                {this.state.notifications ? this.state.notifications.map(
-                  (notification,index) =>
-                  <span key={index} className="notif-badge">
-                    {notification}
-                  </span>
-                ) : null}
-              </span>
+                >
+                  <i className="fa-solid fa-bell"></i>
+                  {this.state.notifications &&
+                    this.state.notifications.length > 0 && (
+                      <span key={index} className="notif-badge">
+                        {this.state.notifications.length}
+                      </span>
+                    )}
+                </button>
+                <em className="icon-name">اعلان</em>
+              </div>
             </div>
           </div>
           <div className="header-div">
-            <span>last online monday</span>
             <button onClick={this.toggleBackground}>
               {this.state.background ? "light" : "dark"}
             </button>
@@ -168,31 +195,29 @@ class Admin extends Component {
               />
               <span>{this.state.admin ? this.state.admin.name : null}</span>
             </div>
-            <div className="admin-div">
-              <span>آخرین بازدید</span>
-              <span> آنلاین</span>
-            </div>
           </div>
           <div className="pages">
-            <a href="/a" className="active">
+            <a>
               <i className="fa-solid fa-box-open"></i>
-              <span onClick={this.props.navigate("/adminproducts")}>
+              <span onClick={() => this.props.navigate("/adminproducts")}>
                 محصولات
               </span>
             </a>
-            <a href="">
+            <a>
               <i className="fa-solid fa-file-invoice"></i>
-              <span onClick={this.props.navigate("/adminorders")}>
+              <span onClick={() => this.props.navigate("/adminorders")}>
                 سفارش ها
               </span>
             </a>
-            <a href="">
+            <a>
               <i className="fa-solid fa-users"></i>
-              <span onClick={this.props.navigate("/adminusers")}>کاربر ها</span>
+              <span onClick={() => this.props.navigate("/adminusers")}>
+                کاربر ها
+              </span>
             </a>
-            <a href="">
+            <a>
               <i className="fa-solid fa-plus"></i>
-              <span onClick={this.props.navigate("/uploadproducts")}>
+              <span onClick={() => this.props.navigate("/uploadproducts")}>
                 افزودن محصول
               </span>
             </a>
@@ -200,12 +225,12 @@ class Admin extends Component {
         </aside>
         <section id="chart">
           <ResponsiveContainer width="100%" height={400}>
-            <LineChart data={data}>
+            <LineChart data={this.state.chartData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <legend />
+              <Legend />
               <Line type="monotone" dataKey="sales" stroke="#8884d8" />
             </LineChart>
           </ResponsiveContainer>
@@ -213,10 +238,10 @@ class Admin extends Component {
         <section>
           <div>
             <AdminOrders />
-            <AdminProducts />
+            <AdminUsers />
           </div>
           <div>
-            <AdminUsers />
+            <AdminProducts />
             <UploadProducts />
           </div>
         </section>

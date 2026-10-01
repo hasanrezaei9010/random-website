@@ -34,10 +34,33 @@
   z-index: 50;
 }
 
-#father-of-all header .header-div {
+#father-of-all header .header-div div {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
+
+  em {
+    position: absolute;
+    display: none;
+    transition: transform 0.9s ease;
+  }
+
+  #bell-wrapper {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+#father-of-all header .header-div div:hover > em {
+  display: inline-block;
+  transform: translate(-5px, 25px);
 }
 
 #father-of-all header .header-div i {
@@ -161,7 +184,6 @@
   color: var(--text-primary);
 }
 
-#father-of-all aside .pages a.active,
 #father-of-all aside .pages a:hover {
   background: rgba(230, 57, 70, 0.1);
   color: var(--accent);

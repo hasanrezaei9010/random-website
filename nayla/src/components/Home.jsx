@@ -35,7 +35,6 @@ class Home extends Component {
         this.setState({
           products: finalResponse.data,
         });
-        console.log("products recieved successfully");
       } else {
         console.log(finalResponse);
       }
