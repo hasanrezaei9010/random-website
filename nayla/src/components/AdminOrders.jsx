@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import "../css/admin-orders.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class AdminOrders extends Component {
   state = { orders: [] };
 
   fetchOrders = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/order/all", {
+      const response = await fetch(`${API_URL}/api/order/all`, {
         headers: { "x-auth-token": sessionStorage.getItem("token") },
       });
       const data = await response.json();
@@ -16,11 +17,9 @@ export default class AdminOrders extends Component {
         this.setState({ orders: data.data });
         toast.success("با موفقیت آپدیت شد");
       } else {
-        console.log(response);
-        toast.error("خطایی رخ داده");
+        toast.error("خطایی رخ داده",response.message);
       }
     } catch (error) {
-      console.error(error);
       toast.error("خطا در برقراری ارتباط");
     }
   };
@@ -32,7 +31,7 @@ export default class AdminOrders extends Component {
   updateStatus = async (id, status) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/order/update/${id}`,
+        `${API_URL}/api/order/update/${id}`,
         {
           method: "PUT",
           headers: {
@@ -47,11 +46,9 @@ export default class AdminOrders extends Component {
         toast.success("با موفقیت آپدیت شد");
         this.componentDidMount(); // رفرش لیست
       } else {
-        console.log(data);
         toast.error("خطایی رخ داده");
       }
     } catch (error) {
-      console.error(error);
       toast.error("خطا در برقراری ارتباط");
     }
   };

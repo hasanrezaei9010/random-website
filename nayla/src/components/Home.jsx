@@ -12,6 +12,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../css/home2.css";
 import { useNavigate } from "react-router-dom";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 class Home extends Component {
   static contextType = Context;
@@ -23,7 +24,7 @@ class Home extends Component {
   fetchProduct = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/product/recieve",
+        `${API_URL}/api/product/recieve`,
         {
           method: "GET",
           headers: { "Content-Type": "application/json" },
@@ -35,10 +36,10 @@ class Home extends Component {
           products: finalResponse.data,
         });
       } else {
-        console.log(finalResponse);
+        toast.error("something went wrong")
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -103,7 +104,7 @@ class Home extends Component {
                       <div className="product-card">
                         <img
                           className="card-img-placeholder"
-                          src={`http://localhost:5000${product.picture}`}
+                          src={`${API_URL}${product.picture}`}
                           alt={product.name}
                           loading="lazy"
                         />

@@ -77,7 +77,6 @@ module.exports = new (class extends controller {
         },
       });
 
-      console.log(user);
       await transporter.sendMail({
         from: process.env.email || "hassanr616263@gmail",
         to: email,
@@ -87,7 +86,7 @@ module.exports = new (class extends controller {
 
       this.response({ res, message: "کد به ایمیل شما ارسال شد" });
     } catch (error) {
-      console.log(error);
+      console.error(error);
       res.json({ message: error.message });
     }
   }
@@ -99,7 +98,6 @@ module.exports = new (class extends controller {
 
     const user = await this.User.findOne({ email });
     if (!user) return res.status(401).json({ message: "درخواست نامعتبر" });
-    console.log(user)
     if (user.resetCode !== resetCode)
       return res.status(404).json({ message: "کد اشتباه است" });
 

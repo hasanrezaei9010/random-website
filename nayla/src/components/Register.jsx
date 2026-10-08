@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { createRef } from "react";
 import axios from 'axios';
 import "../css/register2.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class Register extends React.Component {
   static contextType = Context;
@@ -33,7 +34,7 @@ export default class Register extends React.Component {
     this.setState({ sending: true });
     try {
       /* const captchaResponse = await fetch(
-        "http://localhost:5000/api/task/captcha",
+        `${API_URL}/api/task/captcha`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -42,32 +43,28 @@ export default class Register extends React.Component {
       );
       if (captchaResponse.ok) { */
         const response = await axios.post(
-          "http://localhost:5000/api/auth/register",
+          `${API_URL}/api/auth/register`,
           { name :this.name.current.value , email :this.email.current.value.trim(), password:this.password.current.value },
           { headers: { "custom-header": "value" } },
         );
 
         if (response.status == 200) {
-          console.log("response:",response.data)
-          console.log("token:",response.data.data?.token)
-          console.log("user:",response.data.dat?.user)
           sessionStorage.setItem("token", response.data.data.token);
           sessionStorage.setItem("user", JSON.stringify(response.data.data.user));
           window.location.href = "/";
         } else {
           toast.error("registration failed :" + response.message);
           this.setState({ errors: [...this.state.errors, response.message] });
-          console.log(response);
         }
       /* } else {
         alert("recaptcha failed :" + captchaResponse.message);
         this.setState({
           errors: ["recaptcha failed :" + captchaResponse.message],
         });
-        console.log(captchaResponse);
+        toast.error(captchaResponse.message);
       } */
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
       this.setState({ errors: [...this.state.errors, error.message] });
     } finally {
       this.setState({ sending: false });

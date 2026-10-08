@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {toast} from 'react-toastify';
 import '../css/edit-profile.css';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class EditProfile extends Component {
   state = { name: '', email: '' };
@@ -14,7 +15,7 @@ export default class EditProfile extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     const token = sessionStorage.getItem('token');
-    const res = await fetch('http://localhost:5000/api/user/edit', {
+    const res = await fetch(`${API_URL}/api/user/edit`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import "../css/upload-product.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class UploadProduct extends Component {
   state = { name: "",description:"", price: "", picture: null };
@@ -14,7 +15,7 @@ export default class UploadProduct extends Component {
     formData.append("picture", this.state.picture);
 
     try {
-      const response = await fetch("http://localhost:5000/api/admin/add", {
+      const response = await fetch(`${API_URL}/api/admin/add`, {
         method: "POST",
         headers: {
           "x-auth-token": sessionStorage.getItem("token"),

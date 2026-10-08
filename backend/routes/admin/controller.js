@@ -22,7 +22,6 @@ module.exports = new (class extends controller {
         cache.set('products', products);
         res.json({ message: 'products sent succesfully', data: products });
       } else {
-        console.log('can not find any product')
         res.json({ message: 'can not find any product' })
       }
 
@@ -95,9 +94,7 @@ module.exports = new (class extends controller {
       const admin = await User.findByIdAndUpdate(id, { admin: false });
       if (admin) {
         this.response({ res, code: 200, message: "user updated successfully" });
-        console.log(admin)
       } else {
-        console.log('invalid user data');
         this.reponse({ res, code: 401, message: 'invalid data' });
       }
     } catch (error) {
@@ -120,7 +117,6 @@ module.exports = new (class extends controller {
         await user.save();
         this.response({ res, code: 200, message: "user updated successfully" });
       } else {
-        console.log('invalid user data');
         this.reponse({ res, code: 401, message: 'invalid data' });
       }
 

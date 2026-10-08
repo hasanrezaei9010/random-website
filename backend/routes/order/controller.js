@@ -110,8 +110,6 @@ module.exports = new (class extends controller {
 
   async getUsersOrders(req, res) {
     try {
-      console.log(require("mongoose").modelNames())
-      console.log(req.user)
       const orders = await Order.find({ user: req.user._id })
       .populate('items.product')
       .sort({ date: -1 });

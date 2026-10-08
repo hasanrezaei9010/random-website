@@ -3,6 +3,7 @@ import axios from "axios";
 import Context from "../context.js";
 import { toast } from "react-toastify";
 import "../css/login2.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 class Login extends Component {
   static contextType = Context;
@@ -22,28 +23,25 @@ class Login extends Component {
   codeRequest = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/task/recovery",
+        `${API_URL}/api/task/recovery`,
         {
           email: this.recoveryemail.current.value,
         },
         { headers: { "custom-header": "value" } },
       );
       if (response.ok) {
-        console.log(response);
         toast.success("کد به ایمیل شما ارسال شد");
       } else {
-        console.log(response);
         this.setState({ errors: [response.message] });
       }
     } catch (error) {
-      console.log(error.message);
       this.setState({ errors: [error.message] });
     }
   };
 
   codeVerification = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/task/verify", {
+      const response = await fetch(`${API_URL}/api/task/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -53,10 +51,8 @@ class Login extends Component {
         }),
       });
       if (response.ok) {
-        console.log(response);
         toast.success("رمز با موفقیت تغییر کرد");
       } else {
-        console.log(response);
         this.setState({ errors: [response.message] });
         toast.error("response.message");
       }
@@ -69,7 +65,7 @@ class Login extends Component {
     this.setState({ sending: true });
     try {
       const loginResponse = await fetch(
-        "http://localhost:5000/api/auth/login",
+        `${API_URL}/api/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -93,7 +89,6 @@ class Login extends Component {
       } else {
         toast.error("login failed :" + data.message);
         this.setState({ errors: ["login failed :" + data.message] });
-        console.log(data);
       }
     } catch (error) {
       console.error(error, "feswfrwr");

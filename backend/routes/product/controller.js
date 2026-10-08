@@ -20,7 +20,7 @@ module.exports = new (class extends controller {
         })
       }
     } catch (er) {
-     console.log(er)
+     console.error(er)
     }}
   async fetchProduct(req, res) {
     try {

@@ -7,6 +7,7 @@ import UploadProducts from "./UploadProducts.jsx";
 import { useNavigate } from "react-router-dom";
 import "../css/admin2.css";
 import "../css/notification.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 import {
   LineChart,
@@ -38,8 +39,7 @@ class Admin extends Component {
   fetchLoggedAdmin = async () => {
     try {
       const id = JSON.parse(sessionStorage.getItem('user'))._id;
-      console.log("this is:",id)
-      const response = await fetch(`http://localhost:5000/api/user/loggedadmin/${id}`, {
+      const response = await fetch(`${API_URL}/api/user/loggedadmin/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -52,17 +52,17 @@ class Admin extends Component {
           admin: finalResponse.data,
         });
       } else {
-        console.log("failed to fetch user", finalResponse);
+        toast.error("failed to fetch user", finalResponse);
       }
     } catch (error) {
-      console.log("connection to the server failed", error);
+      toast.error("connection to the server failed", error.message);
     }
   };
 
   fetchChartData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/weekly-sales",
+        `${API_URL}/api/admin/weekly-sales`,
         {
           method: "GET",
           headers: { "x-auth-token": sessionStorage.getItem("token") },
@@ -73,7 +73,7 @@ class Admin extends Component {
         this.setState({ chartData: data.data });
       }
     } catch (error) {
-      console.log("failed to fetch chart data", error);
+      toast.error("failed to fetch chart data", error.message);
     }
   };
 
@@ -86,7 +86,7 @@ class Admin extends Component {
   fetchNotifications = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/task/notification",
+        `${API_URL}/api/task/notification`,
         {
           method: "GET",
           headers: {
@@ -100,7 +100,7 @@ class Admin extends Component {
         this.setState({ notifications: data.data.notifications || [] });
       }
     } catch (error) {
-      console.log(error);
+      toast.error(error.message);
     }
   };
 

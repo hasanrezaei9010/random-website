@@ -1,6 +1,7 @@
 import React, { Component ,createRef} from "react";
 import { toast } from "react-toastify";
 import "../css/admin-users.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class AdminUsers extends Component {
   state = { admins: [] };
@@ -8,7 +9,7 @@ export default class AdminUsers extends Component {
 
   fetchAdmin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user/admin", {
+      const response = await fetch(`${API_URL}/api/user/admin`, {
         method: "GET",
         headers: { "Content-Type" : "application/json",
           "x-auth-token": sessionStorage.getItem("token") },
@@ -17,17 +18,16 @@ export default class AdminUsers extends Component {
       if (response.ok) {
         this.setState({ admins: data.data });
       } else {
-        console.log(data);
         toast.error(data.message);
       }
     } catch (error) {
-      console.error(error);
+      console.error(error.message);
     }
   };
 
   removeAdmin = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/remove/${id}`, {
+      const response = await fetch(`${API_URL}/api/admin/remove/${id}`, {
       method: "PUT",
       headers: { "x-auth-token": sessionStorage.getItem("token") },
     });
@@ -36,7 +36,6 @@ export default class AdminUsers extends Component {
         toast.success("ادمین با موفقیت حذف شد");
         this.fetchAdmin();
       } else {
-        console.log(data);
         toast.error("در فرآیند حذف مشکلی پیش آمد")
       }
     } catch (error) {
@@ -48,7 +47,7 @@ export default class AdminUsers extends Component {
 
   addAdmin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/add", {
+      const response = await fetch(`${API_URL}/api/admin/add`, {
       method: "PUT",
       headers: { "Content-Type" : "application/json",
         "x-auth-token": sessionStorage.getItem("token") },
@@ -59,7 +58,6 @@ export default class AdminUsers extends Component {
         toast.success("ادمین با موفقیت اضافه شد");
         this.fetchAdmin();
       } else {
-        console.log(data);
         toast.error("در فرآیند اضافه کردن مشکلی پیش آمد")
       }
     } catch (error) {

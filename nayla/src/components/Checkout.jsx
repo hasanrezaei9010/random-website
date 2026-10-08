@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {toast} from 'react-toastify';
 import '../css/checkout.css';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class Checkout extends Component {
   state = {
@@ -29,7 +30,7 @@ export default class Checkout extends Component {
        
     try {
       // ارسال به بک‌اند برای ساخت سفارش و دریافت لینک پرداخت
-    const response = await fetch('http://localhost:5000/api/order/create', {
+    const response = await fetch(`${API_URL}/api/order/create`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' ,
          "x-auth-token": sessionStorage.getItem("token")

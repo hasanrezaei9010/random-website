@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { toast } from "react-toastify";
 import "../css/admin-products.css";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class AdminProducts extends Component {
   state = {
@@ -17,7 +18,7 @@ export default class AdminProducts extends Component {
 
   fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/all", {
+      const response = await fetch(`${API_URL}/api/admin/all`, {
         headers: { "x-auth-token": sessionStorage.getItem("token") },
       });
       const data = await response.json();
@@ -25,10 +26,10 @@ export default class AdminProducts extends Component {
       if (response.ok) {
         this.setState({ products: data.data });
       } else {
-        console.log(data);
+        toast.error("خطایی رخ داده")
       }
     } catch (error) {
-      console.error(error);
+      toast.error(error.message);
     }
   };
 
@@ -36,7 +37,7 @@ export default class AdminProducts extends Component {
     try {
       if (!window.confirm("مطمئنی؟")) return;
       const response = await fetch(
-        `http://localhost:5000/api/admin/delete/${id}`,
+        `${API_URL}/api/admin/delete/${id}`,
         {
           method: "DELETE",
           headers: { "x-auth-token": sessionStorage.getItem("token") },
@@ -47,7 +48,6 @@ export default class AdminProducts extends Component {
         toast.success("با موفقیت حذف شد");
         this.fetchProducts();
       } else {
-        console.log(data);
         toast.error(data.message);
       }
     } catch (error) {
@@ -68,7 +68,7 @@ export default class AdminProducts extends Component {
       if(product.picture instanceof File) formData.append("picture",product.picture);
 
       const response = await fetch(
-        `http://localhost:5000/api/admin/update/${id}`,
+        `${API_URL}/api/admin/update/${id}`,
         {
           method: "PUT",
           headers: { "x-auth-token": sessionStorage.getItem("token") },
@@ -80,7 +80,6 @@ export default class AdminProducts extends Component {
         toast.success("با موفقیت آپدیت شد");
         this.fetchProducts();
       } else {
-        console.log(data);
         toast.error(data.message);
       }
     } catch (error) {
@@ -114,7 +113,7 @@ export default class AdminProducts extends Component {
               {filtered.map((p) => (
                 <tr key={p._id}>
                   <td>
-                    <img src={p.product ? `http://localhost:5000${p.picture}` : ""}
+                    <img src={p.product ? `${API_URL}${p.picture}` : ""}
                    alt={p.name} 
                    style={{width:50 , height:50,objectFit:"cover"}}
                    />

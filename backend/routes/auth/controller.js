@@ -37,7 +37,7 @@ module.exports = new (class extends controller {
         }
       });
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 
@@ -58,7 +58,6 @@ module.exports = new (class extends controller {
           message: "couldnt find user",
         });
       }
-      console.log(user,req.body.password,await bcrypt.compare(req.body.password ,user.password))
       const isvalid = await bcrypt.compare(req.body.password ,user.password); //مگه رمز کاربر الان هش نشده پس باید رمز داخل ریکوئست ر هم هش کنیم تا بشه مقایسه کرد دیگه بله؟
       if (!isvalid) {
         return this.response({
@@ -77,7 +76,7 @@ module.exports = new (class extends controller {
         }
       });
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
 
   }

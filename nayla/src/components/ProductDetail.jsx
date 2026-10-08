@@ -14,14 +14,11 @@ const [quantity,setQuantity]=useState(1);
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(()=>{
-    console.log('mounted',id)
-    // محصول رو از بک‌اند یا از state دریافتی می‌گیریم
     const passedProduct = location.state?.product || {};
     if (passedProduct) {
       setProduct(passedProduct);
     } else {
-      // اگر مستقیم وارد URL شد، از بک‌اند می‌گیریم
-      fetch(`http://localhost:5000/api/product/deliever/:${id}`)
+      fetch(`${API_URL}/api/product/deliever/:${id}`)
         .then(res => res.json())
         .then(data => setProduct(data.data ));
     }
@@ -48,7 +45,7 @@ const [quantity,setQuantity]=useState(1);
 
     return (
       <div className="product-detail">
-        <img src={`http://localhost:5000${product.picture}`} alt={product.name} />
+        <img src={`${API_URL}${product.picture}`} alt={product.name} />
         <h1>{product.name}</h1>
         <p>{product.description}</p>
         <span className="price">{product.price} تومان</span>

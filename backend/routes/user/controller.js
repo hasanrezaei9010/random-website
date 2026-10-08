@@ -22,7 +22,7 @@ module.exports = new (class extends controller {
         })
       }
     } catch (er) {
-      console.log(er)
+      console.error(er)
     }
   }
 
@@ -52,7 +52,6 @@ module.exports = new (class extends controller {
           message: "users sent successfully",
           data: admins
         })
-        console.log(admins)
       } else {
         this.response({
           res,
@@ -61,7 +60,7 @@ module.exports = new (class extends controller {
         })
       }
     } catch (er) {
-      console.log(er)
+      console.error(er)
     }
   }
 

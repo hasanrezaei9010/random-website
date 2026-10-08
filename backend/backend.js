@@ -38,7 +38,7 @@ app.use('/uploads',
         next()
     },
     express.static(path.join(__dirname, "uploads")));
-app.use(cors({ origin: ['http://localhost:3001'] }));
+app.use(cors({ origin: ['http://localhost:3001' || 'https://my-domain.com:80'] }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));

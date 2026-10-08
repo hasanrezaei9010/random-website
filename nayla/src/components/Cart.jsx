@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Link} from 'react-router-dom';
 import '../css/cart.css';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class Cart extends Component {
   state = {
@@ -31,7 +32,7 @@ export default class Cart extends Component {
           <>
             {this.state.cart.map(item => (
               <div key={item._id} className="cart-item">
-                <img src={`http://localhost:5000${item.picture}`} alt={item.name} />
+                <img src={`${API_URL}${item.picture}`} alt={item.name} />
                 <h4>{item.name}</h4>
                 <span>{item.quantity} عدد</span>
                 <span>{item.price * item.quantity} تومان</span>

@@ -1,11 +1,12 @@
 import {Component} from 'react';
 import '../css/myorders.css';
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default class MyOrders extends Component {
   state = { orders: [], isLoading: true };
 
   componentDidMount() {
-    fetch('http://localhost:5000/api/order/my-orders', {
+    fetch(`${API_URL}/api/order/my-orders`, {
       headers: {  "x-auth-token": sessionStorage.getItem("token") }
     })
       .then(res => res.json())

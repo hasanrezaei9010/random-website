@@ -3,7 +3,6 @@ const router = express.Router();
 const controller = require("./controller.js");
 
 router.get("/deliever/:id",
-    () => console.log('reaches here'),
     controller.fetchProduct
 );
 

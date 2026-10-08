@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const ProtectedRoute = () => {
   const token = sessionStorage.getItem("token");
@@ -16,7 +17,7 @@ const ProtectedRoute = () => {
       }
       try {
         const response = await fetch(
-          "http://localhost:5000/api/task/authorization",
+          `${API_URL}/api/task/authorization`,
           {
             method: "POST",
             headers: {
@@ -32,7 +33,6 @@ const ProtectedRoute = () => {
         }
       } catch (error) {
         setIsAuthenticated(false);
-        console.log(error,"athorizing login token failed");
       } finally {
         setIsLoading(false);
       }
