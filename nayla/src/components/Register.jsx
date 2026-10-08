@@ -47,12 +47,15 @@ export default class Register extends React.Component {
           { headers: { "custom-header": "value" } },
         );
 
-        if (response.statusText == "OK") {
-          console.log(response);
-          localStorage.setItem("authtoken", response.data);
+        if (response.status == 200) {
+          console.log("response:",response.data)
+          console.log("token:",response.data.data?.token)
+          console.log("user:",response.data.dat?.user)
+          sessionStorage.setItem("token", response.data.data.token);
+          sessionStorage.setItem("user", JSON.stringify(response.data.data.user));
           window.location.href = "/";
         } else {
-          alert("registration failed :" + response.message);
+          toast.error("registration failed :" + response.message);
           this.setState({ errors: [...this.state.errors, response.message] });
           console.log(response);
         }
@@ -102,10 +105,10 @@ export default class Register extends React.Component {
             </button>
           </div>
           <div className="recaptcha-wrapper">
-          <ReCAPTCHA
+          {/* <ReCAPTCHA
             sitekey="dhhghgh"
             onChange={(t) => this.setState({ token: t })}
-          />
+          /> */}
           </div>
           <div className="span-group">
             <span>

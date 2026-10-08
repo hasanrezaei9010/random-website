@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import Navbar from "./Navbar.jsx";
 import "../css/service.css";
 
 export default class Services extends Component {
   render() {
     return (
+      <>
+      <Navbar/>
       <div className="services-page">
         <h1>خدمات ما</h1>
         <p className="subtitle">آنچه می‌توانید از ما انتظار داشته باشید</p>
@@ -14,7 +17,7 @@ export default class Services extends Component {
           <div className="service-card"><div className="service-icon">📞</div><h3>مشاوره</h3><p>مشاوره رایگان قبل از خرید</p></div>
         </div>
       </div>
-    );
+    </>);
   }
 }
 

@@ -4,12 +4,12 @@ import '../css/cart.css';
 
 export default class Cart extends Component {
   state = {
-    cart: JSON.parse(localStorage.getItem('cart')) || []
+    cart: JSON.parse(sessionStorage.getItem('cart')) || []
   };
 
   removeItem = (id) => {
     const newCart = this.state.cart.filter(item => item._id !== id);
-    localStorage.setItem('cart', JSON.stringify(newCart));
+    sessionStorage.setItem('cart', JSON.stringify(newCart));
     this.setState({ cart: newCart });
   };
 
@@ -31,7 +31,7 @@ export default class Cart extends Component {
           <>
             {this.state.cart.map(item => (
               <div key={item._id} className="cart-item">
-                <img src={item.picture} alt={item.name} />
+                <img src={`http://localhost:5000${item.picture}`} alt={item.name} />
                 <h4>{item.name}</h4>
                 <span>{item.quantity} عدد</span>
                 <span>{item.price * item.quantity} تومان</span>
@@ -41,7 +41,6 @@ export default class Cart extends Component {
             <div className="total">جمع کل: {this.getTotal()} تومان</div>
             <Link 
             className="checkout-link"
-            style={{all:'unset',backgroundColor:'white',font:'#b22234',border:'2px solid #b22234',padding:'5px',marginTop:'50px',borderRadius:'8px'}}
             to={'/checkout'}>ادامه و پرداخت</Link>
           </>
         )}

@@ -3,21 +3,22 @@ const User = require("./../../models/user.js");
 
 module.exports = new (class extends controller {
 
-  async fetchUser(req, res) {
+  async loggedAdmin(req, res) {
     try {
-      const user = await this.User.findOne({ email: "hasan@gmail.com" });
-      if (user) {
+      const {id} = req.params;
+      const admin = await this.User.findById(id);
+      if (admin) {
         this.response({
           res,
           code: 200,
-          message: "user sent successfully",
-          data: user
+          message: "admin sent successfully",
+          data: admin
         })
       } else {
         this.response({
           res,
           code: 500,
-          message: "couldnt find the requested user",
+          message: "couldnt find the requested admin",
         })
       }
     } catch (er) {

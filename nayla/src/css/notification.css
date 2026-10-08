@@ -20,7 +20,6 @@
   transform: scale(1.1);
 }
 
-/* ============ Badge ============ */
 .notif-badge {
   position: absolute;
   top: 2px;
@@ -56,7 +55,6 @@
   }
 }
 
-/* ============ Popover ============ */
 .notif-popover {
   position: fixed;
   top: 70px;

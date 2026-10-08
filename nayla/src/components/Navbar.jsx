@@ -10,7 +10,7 @@ export default class Navbar extends Component {
     window.location.href = "/login";
   };
   render() {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
+    const user = JSON.parse(sessionStorage.getItem("user") || "null");
     return (
       <nav className="navbar">
         <Link to="/" className="brand">

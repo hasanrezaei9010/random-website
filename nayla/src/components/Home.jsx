@@ -10,7 +10,6 @@ import { Navigation, Mousewheel } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-/* import "../css/home-red.css"; */
 import "../css/home2.css";
 import { useNavigate } from "react-router-dom";
 
@@ -56,7 +55,7 @@ class Home extends Component {
         <main className="home-main">
           <section className="hero">
             <div className="hero-image">
-              <div className="hero-img-placeholder"></div>
+              <img src="landscape.jpg" loading="lazy"/>
             </div>
             <div className="hero-content">
               <h1>
@@ -104,7 +103,7 @@ class Home extends Component {
                       <div className="product-card">
                         <img
                           className="card-img-placeholder"
-                          src={product.picture}
+                          src={`http://localhost:5000${product.picture}`}
                           alt={product.name}
                           loading="lazy"
                         />

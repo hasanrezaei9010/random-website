@@ -189,7 +189,7 @@
   color: var(--accent);
 }
 
-/* ============ Chart ============ */
+/*Chart*/
 #chart {
   grid-area: main;
   padding: 32px;
@@ -212,7 +212,7 @@
   color: var(--text-primary) !important;
 }
 
-/* ============ Sections (Admin Components) ============ */
+/*Sections (Admin Components)*/
 #father-of-all > section:last-child {
   grid-area: main;
   padding: 0 32px 32px;
@@ -230,7 +230,6 @@
   min-height: 200px;
 }
 
-/* ============ Responsive ============ */
 @media (max-width: 900px) {
   #father-of-all {
     grid-template-columns: 1fr;

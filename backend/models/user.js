@@ -14,6 +14,6 @@ resetToken:String
 });
 
 
-const User = mongoose.model("user",schema);
+const User = mongoose.model("User",schema);
 
 module.exports = User;

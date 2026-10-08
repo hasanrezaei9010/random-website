@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+
+import Navbar from "./Navbar.jsx";
 import "../css/contact.css";
 
 export default class Contact extends Component {
   render() {
     return (
+      <>
+      <Navbar/>
       <div className="contact-page">
         <h1>تماس با ما</h1>
         <p className="subtitle">همیشه در دسترس هستیم</p>
@@ -17,6 +21,6 @@ export default class Contact extends Component {
           <div className="contact-map"><div className="map-placeholder"></div></div>
         </div>
       </div>
-    );
+    </>);
   }
 }

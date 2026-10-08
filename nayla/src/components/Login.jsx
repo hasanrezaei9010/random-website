@@ -2,11 +2,7 @@ import React, { Component, createRef } from "react";
 import axios from "axios";
 import Context from "../context.js";
 import { toast } from "react-toastify";
-//import "../css/login.css";
 import "../css/login2.css";
-
-
-//import 'bootstrap/dist/css/bootstrap.min.css'
 
 class Login extends Component {
   static contextType = Context;
@@ -86,12 +82,12 @@ class Login extends Component {
       const data = await loginResponse.json();
       if (loginResponse.status == 200) {
         if (data.data.user.admin) {
-          localStorage.setItem("token", data.data.token);
-          localStorage.setItem("user", JSON.stringify(data.data.user));
+          sessionStorage.setItem("token", data.data.token);
+          sessionStorage.setItem("user", JSON.stringify(data.data.user));
           window.location.href = "/admin";
         } else {
-          localStorage.setItem("token", data.data.token);
-          localStorage.setItem("user", JSON.stringify(data.data.user));
+          sessionStorage.setItem("token", data.data.token);
+          sessionStorage.setItem("user", JSON.stringify(data.data.user));
           window.location.href = "/";
         }
       } else {
@@ -119,11 +115,11 @@ class Login extends Component {
           </ul>
         ) : null}
 
-        <div className="login login-page" id="login">
+        <div className="login-page" id="login">
           
           <div className="login-card">
             <h1>خوش آمدید</h1>
-            <div className="input-group form-group">
+            <div className="form-group">
               <input
                 ref={this.identifier}
                 id="username"
@@ -133,7 +129,7 @@ class Login extends Component {
               <label htmlFor="username">ایمیل یا نام کاربری</label>
             </div>
 
-            <div className="input-group form-group">
+            <div className="form-group">
               <input
                 ref={this.password}
                 id="password"

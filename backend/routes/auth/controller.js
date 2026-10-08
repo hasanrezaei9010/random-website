@@ -28,7 +28,7 @@ module.exports = new (class extends controller {
       const salt = await bcrypt.genSalt(10);
       user.password = await bcrypt.hash(user.password, salt); //وقتی کاربر هنوز تو دیتابیس نیست و تو رمه برا چی باس اویت بذاریم
       await user.save();
-      const token = jwt.sign({ _id: user.id , admin: user.admin }, config.get("jwt"));
+      const token = jwt.sign({ _id: user.id }, config.get("jwt"));
       this.response({
         res,
         message: "user registered successfully",

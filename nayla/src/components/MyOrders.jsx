@@ -6,10 +6,10 @@ export default class MyOrders extends Component {
 
   componentDidMount() {
     fetch('http://localhost:5000/api/order/my-orders', {
-      headers: {  "x-auth-token": localStorage.getItem("token") }
+      headers: {  "x-auth-token": sessionStorage.getItem("token") }
     })
       .then(res => res.json())
-      .then(data => this.setState({ orders: data.data, isLoading: false }))
+      .then(data => this.setState({ orders: data.data || [], isLoading: false }))
       .catch(err => console.error(err));
   }
 
@@ -30,7 +30,7 @@ export default class MyOrders extends Component {
               <ul>
                 {order.items.map(item => (
                   <li key={item._id}>
-                    {item.product.name} × {item.quantity}
+                    {item.product?.name || "محصول حذف شده"} × {item.quantity}
                   </li>
                 ))}
               </ul>

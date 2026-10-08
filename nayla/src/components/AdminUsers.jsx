@@ -11,7 +11,7 @@ export default class AdminUsers extends Component {
       const response = await fetch("http://localhost:5000/api/user/admin", {
         method: "GET",
         headers: { "Content-Type" : "application/json",
-          "x-auth-token": localStorage.getItem("token") },
+          "x-auth-token": sessionStorage.getItem("token") },
       });
       const data = await response.json();
       if (response.ok) {
@@ -29,7 +29,7 @@ export default class AdminUsers extends Component {
     try {
       const response = await fetch(`http://localhost:5000/api/admin/remove/${id}`, {
       method: "PUT",
-      headers: { "x-auth-token": localStorage.getItem("token") },
+      headers: { "x-auth-token": sessionStorage.getItem("token") },
     });
     const data = await response.json();
       if (response.ok) {
@@ -51,7 +51,7 @@ export default class AdminUsers extends Component {
       const response = await fetch("http://localhost:5000/api/admin/add", {
       method: "PUT",
       headers: { "Content-Type" : "application/json",
-        "x-auth-token": localStorage.getItem("token") },
+        "x-auth-token": sessionStorage.getItem("token") },
       body : JSON.stringify({identifier : this.identifier.current.value})
     });
     const data = await response.json();

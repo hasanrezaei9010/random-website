@@ -17,8 +17,7 @@ export default class UploadProduct extends Component {
       const response = await fetch("http://localhost:5000/api/admin/add", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": localStorage.getItem("token"),
+          "x-auth-token": sessionStorage.getItem("token"),
         },
         body: formData,
       });

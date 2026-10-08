@@ -7,13 +7,13 @@ export default class EditProfile extends Component {
   
 
   componentDidMount() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(sessionStorage.getItem('user'));
     if (user) this.setState({ name: user.name, email: user.email });
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     const res = await fetch('http://localhost:5000/api/user/edit', {
       method: 'PUT',
       headers: {
@@ -23,7 +23,7 @@ export default class EditProfile extends Component {
       body: JSON.stringify({name : this.state.name , email : this.state.email})
     });
     const data = await res.json();
-    localStorage.setItem('user', JSON.stringify(data.data));
+    sessionStorage.setItem('user', JSON.stringify(data.data));
     toast.success('پروفایل به‌روزرسانی شد');
   };
 

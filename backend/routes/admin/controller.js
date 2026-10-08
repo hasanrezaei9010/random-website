@@ -34,9 +34,11 @@ module.exports = new (class extends controller {
   // اضافه کردن محصول
   async addProduct(req, res) {
     try {
-      const { name, price, description, picture } = req.body;
+      const { name, price, description} = req.body;
+      const picture = req.file ? `/uploads/${req.file.filename}` : "";
       const product = new Product({ name, price, description, picture });
       await product.save();
+      cache.del("products");
       res.status(201).json({ data: product });
     } catch (error) {
       console.error(error)
@@ -52,6 +54,7 @@ module.exports = new (class extends controller {
     try {
       const product = await Product.findByIdAndDelete(req.params.id);
       if (product) {
+         cache.del("products");
         res.json({ message: 'محصول حذف شد' });
       } else {
         this.response({ res, code: 401, message: "محصول یافت نشد" })
@@ -67,16 +70,17 @@ module.exports = new (class extends controller {
   // ویرایش محصول
   async updateProduct(req, res) {
     try {
-      const { name, picture, description, price } = req.body.product;
+      const { name, description, price } = req.body;
       const product = await Product.findById(req.params.id);
       if (name) product.name = name;
-      if (picture) product.picture = picture;
+      if (req.file) product.picture = `/uploads/${req.file.filename}`;
       if (description) product.description = description;
       if (price) product.price = price;
-      product.save()
+      await product.save()
+       cache.del("products");
       res.json({ message: 'محصول با موفقیت به روز شد', data: product });
     } catch (error) {
-      console.error(error)
+      console.error(error);
       const err = new Error('مشکل داخلی سرور');
       err.status = 500;
       throw err

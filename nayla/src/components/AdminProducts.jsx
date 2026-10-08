@@ -6,6 +6,7 @@ export default class AdminProducts extends Component {
   state = {
     products: [],
     updatedProduct: {},
+    originalProduct: {},
     search: "",
     updatedProductId: null,
   };
@@ -17,7 +18,7 @@ export default class AdminProducts extends Component {
   fetchProducts = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/admin/all", {
-        headers: { "x-auth-token": localStorage.getItem("token") },
+        headers: { "x-auth-token": sessionStorage.getItem("token") },
       });
       const data = await response.json();
 
@@ -38,7 +39,7 @@ export default class AdminProducts extends Component {
         `http://localhost:5000/api/admin/delete/${id}`,
         {
           method: "DELETE",
-          headers: { "x-auth-token": localStorage.getItem("token") },
+          headers: { "x-auth-token": sessionStorage.getItem("token") },
         },
       );
       const data = await response.json();
@@ -57,12 +58,21 @@ export default class AdminProducts extends Component {
 
   handleUpdate = async (id) => {
     try {
+      const formData = new FormData();
+      const product = this.state.updatedProduct;
+      const original = this.state.originalProduct;
+
+      if(product.name && product.name !== original.name) formData.append("name",product.name);
+      if(product.description && product.description !== original.description) formData.append("description",product.description);
+      if(product.price && product.price !== original.price) formData.append("price",product.price);
+      if(product.picture instanceof File) formData.append("picture",product.picture);
+
       const response = await fetch(
         `http://localhost:5000/api/admin/update/${id}`,
         {
           method: "PUT",
-          headers: { "x-auth-token": localStorage.getItem("token") },
-          body: JSON.stringify((product = this.state.updatedProduct)),
+          headers: { "x-auth-token": sessionStorage.getItem("token") },
+          body: formData,
         },
       );
       const data = await response.json();
@@ -103,7 +113,12 @@ export default class AdminProducts extends Component {
             <tbody>
               {filtered.map((p) => (
                 <tr key={p._id}>
-                  <td>{p.picture}</td>
+                  <td>
+                    <img src={p.product ? `http://localhost:5000${p.picture}` : ""}
+                   alt={p.name} 
+                   style={{width:50 , height:50,objectFit:"cover"}}
+                   />
+                   </td>
                   <td>{p.name}</td>
                   <td>{p.price}</td>
                   <td>
@@ -121,6 +136,7 @@ export default class AdminProducts extends Component {
                         this.setState({
                           updatedProductId: p._id,
                           updatedProduct: { ...p },
+                          originalProduct: { ...p }
                         });
                       }}
                     >
@@ -133,6 +149,13 @@ export default class AdminProducts extends Component {
           </table>
         </div>
         <dialog id="update-product" className="update-popover" popover="manual">
+          <button
+            id="close-notif"
+            popoverTargetAction="hide"
+            popoverTarget="update-product"
+          >
+            ×
+          </button>
           <input
             onChange={(e) =>
               this.setState((prevState) => ({
@@ -158,7 +181,6 @@ export default class AdminProducts extends Component {
             }
             type="file"
             name="picture"
-            value={this.state.updatedProduct.picture}
             placeholder="تصویر محصول را بارگذاری کنید"
           />
           <input

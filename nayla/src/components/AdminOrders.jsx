@@ -8,7 +8,7 @@ export default class AdminOrders extends Component {
   fetchOrders = async () => {
     try {
       const response = await fetch("http://localhost:5000/api/order/all", {
-        headers: { "x-auth-token": localStorage.getItem("token") },
+        headers: { "x-auth-token": sessionStorage.getItem("token") },
       });
       const data = await response.json();
 
@@ -37,7 +37,7 @@ export default class AdminOrders extends Component {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            "x-auth-token": localStorage.getItem("token"),
+            "x-auth-token": sessionStorage.getItem("token"),
           },
           body: JSON.stringify({ status }),
         },

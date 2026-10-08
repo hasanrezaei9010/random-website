@@ -35,13 +35,15 @@ class Admin extends Component {
     this.setState((prevState) => ({ background: !prevState.background }));
   };
 
-  fetchUser = async () => {
+  fetchLoggedAdmin = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/user/recieve", {
+      const id = JSON.parse(sessionStorage.getItem('user'))._id;
+      console.log("this is:",id)
+      const response = await fetch(`http://localhost:5000/api/user/loggedadmin/${id}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          "x-auth-token": localStorage.getItem("token"),
+          "x-auth-token": sessionStorage.getItem("token"),
         },
       });
       const finalResponse = await response.json();
@@ -63,7 +65,7 @@ class Admin extends Component {
         "http://localhost:5000/api/admin/weekly-sales",
         {
           method: "GET",
-          headers: { "x-auth-token": localStorage.getItem("token") },
+          headers: { "x-auth-token": sessionStorage.getItem("token") },
         },
       );
       const data = await response.json();
@@ -89,7 +91,7 @@ class Admin extends Component {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            "x-auth-token": localStorage.getItem("token"),
+            "x-auth-token": sessionStorage.getItem("token"),
           },
         },
       );
@@ -103,7 +105,7 @@ class Admin extends Component {
   };
 
   componentDidMount() {
-    this.fetchUser();
+    this.fetchLoggedAdmin();
     this.fetchNotifications();
     this.fetchChartData();
   }
@@ -237,12 +239,12 @@ class Admin extends Component {
         </section>
         <section>
           <div>
-            <AdminOrders />
             <AdminUsers />
+            <AdminOrders />
           </div>
           <div>
-            <AdminProducts />
             <UploadProducts />
+            <AdminProducts />
           </div>
         </section>
       </div>

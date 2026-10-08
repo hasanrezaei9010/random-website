@@ -1,5 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { useNavigate, useLocation,useParams } from 'react-router-dom';
+import {toast} from "react-toastify";
 import '../css/productdetail.css';
 
 export default function ProductDetail() {
@@ -10,6 +11,7 @@ const [quantity,setQuantity]=useState(1);
   const navigate = useNavigate();
   const location = useLocation();
   const {id} = useParams();
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
   useEffect(()=>{
     console.log('mounted',id)
@@ -28,9 +30,8 @@ const [quantity,setQuantity]=useState(1);
 
   const addToCart = () => {
     // ذخیره در localStorage به عنوان سبد خرید ساده
-    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const cart = JSON.parse(sessionStorage.getItem('cart')) || [];
     
-    // چک کن آیا قبلاً اضافه شده؟
     const existingIndex = cart.findIndex(item => item._id === product._id);
     if (existingIndex > -1) {
       cart[existingIndex].quantity += quantity;
@@ -38,16 +39,16 @@ const [quantity,setQuantity]=useState(1);
       cart.push({ ...product, quantity });
     }
     
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert('محصول به سبد خرید اضافه شد!');
-    navigate('/cart'); // هدایت به صفحه سبد خرید
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    toast.success('محصول به سبد خرید اضافه شد!');
+    navigate('/cart');
   };
 
     if (!product) return <div>در حال بارگذاری...</div>;
 
     return (
       <div className="product-detail">
-        <img src={product.picture} alt={product.name} />
+        <img src={`http://localhost:5000${product.picture}`} alt={product.name} />
         <h1>{product.name}</h1>
         <p>{product.description}</p>
         <span className="price">{product.price} تومان</span>

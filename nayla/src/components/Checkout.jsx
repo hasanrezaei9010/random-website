@@ -7,7 +7,7 @@ export default class Checkout extends Component {
     name: '',
     address: '',
     phone: '',
-    cart: JSON.parse(localStorage.getItem('cart')) || []
+    cart: JSON.parse(sessionStorage.getItem('cart')) || []
   };
 
   handleSubmit = async (e) => {
@@ -32,7 +32,7 @@ export default class Checkout extends Component {
     const response = await fetch('http://localhost:5000/api/order/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' ,
-         "x-auth-token": localStorage.getItem("token")
+         "x-auth-token": sessionStorage.getItem("token")
       },
       body: JSON.stringify(orderData)
     });

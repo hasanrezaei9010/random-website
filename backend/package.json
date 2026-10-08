@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "auto-bind": "^4.0.0",
+    "axios": "^1.20.0",
     "bcrypt": "^6.0.0",
     "compression": "^1.8.2",
     "config": "^4.4.1",
@@ -16,6 +17,7 @@
     "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.6.3",
+    "multer": "^2.4.0",
     "node-cache": "^5.1.2",
     "nodemailer": "^9.0.3",
     "nodemon": "^3.1.14",

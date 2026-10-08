@@ -1,6 +1,8 @@
 const controller = require("../controller.js");
 const Order = require("../../models/order.js");
 const Notification = require("../../models/notification.js");
+const axios = require("axios");
+const Product = require("../../models/product.js");
 
 module.exports = new (class extends controller {
   // متد ۱: ساخت سفارش و دریافت لینک پرداخت
@@ -108,6 +110,8 @@ module.exports = new (class extends controller {
 
   async getUsersOrders(req, res) {
     try {
+      console.log(require("mongoose").modelNames())
+      console.log(req.user)
       const orders = await Order.find({ user: req.user._id })
       .populate('items.product')
       .sort({ date: -1 });
@@ -128,7 +132,7 @@ module.exports = new (class extends controller {
       if (order) {
         order.status = status;
         order.save();
-        res.json({ messgae: 'updated successfully', data: order });
+        res.json({ message: 'updated successfully', data: order });
       } else {
         this.response({ res, code: 401, message: 'order was not found' })
       }

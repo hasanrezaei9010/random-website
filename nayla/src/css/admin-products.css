@@ -109,7 +109,7 @@
 
 /* Popover Update Form */
 .update-popover {
-  position: fixed;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -171,6 +171,32 @@
 .update-popover button:hover {
   background: var(--accent-hover);
   transform: translateY(-1px);
+}
+
+.update-popover #close-notif {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  color: #a0a0a0;
+  border: 1px solid #e63946;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-popover #close-notif:hover {
+  background: rgba(230, 57, 70, 0.15);
+  color: #e63946;
+  transform: rotate(90deg);
 }
 
 @keyframes popIn {

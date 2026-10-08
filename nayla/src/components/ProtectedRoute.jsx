@@ -2,8 +2,8 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 const ProtectedRoute = () => {
-  const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+  const token = sessionStorage.getItem("token");
+  const user = sessionStorage.getItem("user");
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   

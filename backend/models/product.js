@@ -7,6 +7,6 @@ description:{type:String,required:true},
 price:{type:String,required:true}
 });
 
-const Product = new mongoose.model('product',schema);
+const Product = mongoose.model('Product',schema);
 
 module.exports = Product;

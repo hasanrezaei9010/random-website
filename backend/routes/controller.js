@@ -27,7 +27,7 @@ validationBody (req,res) {
 
 validate(req,res,next){
     if(this.validationBody(req,res))
-        return res.status(500).json("its stuck here");
+        return;
       
  next();
 };
