@@ -10,7 +10,6 @@ export default class Heading extends Component {
   };
 
   slider = (index) => {
-    toast.info("i exist");
     this.setState({ activeIndex: index });
   };
 

@@ -38,7 +38,11 @@ app.use('/uploads',
         next()
     },
     express.static(path.join(__dirname, "uploads")));
-app.use(cors({ origin: ['http://localhost:3001' || 'https://my-domain.com:80'] }));
+app.use(cors({ 
+    origin:  '*',
+    methods:['GET','POST','PUT','DELETE'],
+    allowedHeaders:['Content-Type', 'x-auth-token']
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -82,5 +86,5 @@ process.on("unhandledRejection", (ex) => {
     process.exit(1);
 })
 
-app.listen(port, () => { console.log(`running on port ${port}`) });
+app.listen(port, '0.0.0.0', () => { console.log(`running on port ${port}`) });
 
